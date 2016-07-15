@@ -1,0 +1,43 @@
+#ifndef APSDK_ANML_HPP_
+#define APSDK_ANML_HPP_
+
+#include "AnmlMacro.hpp"
+#include "AnmlNetwork.hpp"
+#include "Automaton.hpp"
+
+#include <string>
+
+#include <micron/ap/ap_anml.h>
+
+namespace ap {
+
+class Anml {
+public:
+  Anml();
+
+  /**
+   * Copying may result in destruction of the
+   * orginal object. Do NOT allow copying.
+   */
+  Anml(const Anml&) = delete;
+
+  Anml(const Anml&&);
+
+  AnmlMacro
+  loadMacro(const std::string&);
+
+  AnmlNetwork
+  createWorkspace(const std::string&);
+
+  Automaton 
+  compile();
+
+  ~Anml();
+
+private:
+  ap_anml_t m_anml;
+}; // class Anml
+
+} // namespace ap
+
+#endif // APSDK_ANML_HPP_
