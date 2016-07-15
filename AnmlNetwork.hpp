@@ -11,7 +11,7 @@ namespace ap {
 
 class AnmlNetwork {
 public:
-  AnmlNetwork(ap_anml_network_t*);
+  AnmlNetwork(const ap_anml_network_t&);
 
   AnmlNetwork(const AnmlNetwork&);
 
@@ -27,7 +27,7 @@ public:
   ~AnmlNetwork();
 
 private:
-  ap_anml_network_t* m_network;
+  ap_anml_network_t m_network;
 }; // class AnmlNetwork
 
 } // namespace ap

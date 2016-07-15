@@ -1,6 +1,6 @@
 CXX = g++
 LINKER = g++
-TARGETLIB	= libapsdk.so 
+TARGETLIB	= libapsdk.so
 
 #LIBS:= -lboost_filesystem\
        -lboost_program_options\
@@ -10,8 +10,12 @@ TARGETLIB	= libapsdk.so
 LIBS := -lapexec\
 			  -lapcompile
 
-CXXFLAGS = -fPIC -Wall -std=c++0x -O3 -DNDEBUG 
-LDFLAGS = -shared
+# Release flags
+#CXXFLAGS = -fPIC -Wall -std=c++0x -O3 -DNDEBUG
+#LDFLAGS = -shared
+# Debug flags
+CXXFLAGS = -fPIC -Wall -std=c++0x -g
+LDFLAGS = -shared -g
 
 SOURCES:= AnmlMacro.cpp\
 					AnmlNetwork.cpp\
@@ -20,7 +24,7 @@ SOURCES:= AnmlMacro.cpp\
 
 OBJECTS = $(patsubst %.cpp,%.o,$(SOURCES))
 
-%.o: %.cpp 
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(TARGETLIB) : $(OBJECTS)
@@ -29,4 +33,4 @@ $(TARGETLIB) : $(OBJECTS)
 all : $(OBJECTS) $(TARGETLIB)
 
 clean:
-	-rm -rf *.o $(TARGETLIB) 
+	-rm -rf *.o $(TARGETLIB)

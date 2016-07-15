@@ -5,6 +5,11 @@
 #include <micron/ap/ap_load.h>
 #include <micron/ap/ap_element_map.h>
 #include <micron/ap/ap_reload.h>
+#include <micron/ap/sys/platform.h>
+#if defined(LINUX32) || defined(LINUX64)
+#include <fcntl.h>
+#include <unistd.h>
+#endif
 
 
 namespace ap {
@@ -46,10 +51,13 @@ Automaton::save(
   const std::string& fileName
 ) const
 {
-  FILE* f = fopen(fileName.c_str(), "wb");
-  int pos = ftell(f);
-  AP_Save(*m_automaton, pos); 
-  fclose(f);
+  file_descriptor_t fd;
+#if defined(LINUX32) || defined(LINUX64)
+	fd = open(fileName.c_str(),O_CREAT|O_RDWR, 0644);
+#else
+	fd = CreateFileA(fileName.c_str(), GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+#endif
+  AP_Save(*m_automaton, fd);
 }
 
 

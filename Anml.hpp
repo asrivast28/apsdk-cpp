@@ -32,7 +32,7 @@ public:
   void
   compileMacros() const;
 
-  Automaton 
+  Automaton
   compile() const;
 
   ~Anml();

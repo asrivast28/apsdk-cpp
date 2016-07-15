@@ -24,8 +24,8 @@ Anml::loadMacro(
   const std::string& fileName
 )
 {
-  ap_macro_def_t* macro = 0;
-  AP_LoadAnmlMacro(m_anml, macro, 0, fileName.c_str(), 0, AP_OPT_DEFAULT, 0);
+  ap_macro_def_t macro;
+  AP_LoadAnmlMacro(m_anml, &macro, 0, fileName.c_str(), 0, AP_OPT_DEFAULT, 0);
   return AnmlMacro(macro);
 }
 
@@ -35,8 +35,8 @@ Anml::createNetwork(
   const std::string& anmlId
 )
 {
-  ap_anml_network_t* network = 0;
-  AP_CreateAutomataNetwork(m_anml, network, anmlId.c_str());
+  ap_anml_network_t network;
+  AP_CreateAutomataNetwork(m_anml, &network, anmlId.c_str());
   return AnmlNetwork(network);
 }
 
@@ -44,7 +44,7 @@ void
 Anml::compileMacros(
 ) const
 {
-  AP_CompileMacros(m_anml, 0, 0, 0, AP_OPT_DEFAULT, 0); 
+  AP_CompileMacros(m_anml, 0, 0, 0, AP_OPT_DEFAULT, 0);
 }
 
 Automaton
