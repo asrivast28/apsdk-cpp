@@ -27,10 +27,13 @@ public:
   loadMacro(const std::string&);
 
   AnmlNetwork
-  createWorkspace(const std::string&);
+  createNetwork(const std::string&);
+
+  void
+  compileMacros() const;
 
   Automaton 
-  compile();
+  compile() const;
 
   ~Anml();
 

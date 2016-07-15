@@ -13,8 +13,17 @@ public:
 
   AnmlMacro(const AnmlMacro&);
 
+  void
+  setMacroDefToBeCompiled() const;
+
   void 
   getParamFromName(const std::string&) const;
+
+  struct ap_anml_element
+  getAnmlElement() const;
+
+  ap_macro_def_t*
+  operator*();
 
   ~AnmlMacro();
 

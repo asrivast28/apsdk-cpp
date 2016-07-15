@@ -1,6 +1,8 @@
 #ifndef APSDK_AUTOMATON_HPP_
 #define APSDK_AUTOMATON_HPP_
 
+#include <string>
+
 #include <micron/ap/ap_anml.h>
 
 namespace ap {
@@ -16,6 +18,15 @@ public:
   Automaton(const Automaton&) = delete;
 
   Automaton(const Automaton&&);
+
+  void
+  getElementRef(const std::string&) const;
+
+  void
+  setSymbol();
+
+  void
+  save(const std::string&) const;
 
   ~Automaton();
 
