@@ -21,13 +21,14 @@ AnmlMacro::AnmlMacro(
 {
 }
 
-void
+AnmlMacro::ParamRef
 AnmlMacro::getParamFromName(
   const std::string& name
 ) const
 {
-  ap_macro_param_ref_t* param = 0;
-  AP_GetMacroParamFromName(m_macro, param, name.c_str());
+  ap_macro_param_ref_t param;
+  AP_GetMacroParamFromName(m_macro, &param, name.c_str());
+  return ParamRef(param);
 }
 
 void
@@ -52,6 +53,36 @@ AnmlMacro::getAnmlElement(
 AnmlMacro::~AnmlMacro(
 )
 {
+}
+
+AnmlMacro::ParamRef::ParamRef(
+) : m_paramRef(0)
+{
+}
+
+AnmlMacro::ParamRef::ParamRef(
+  const ParamRef& that 
+) : m_paramRef(that.m_paramRef)
+{
+}
+
+AnmlMacro::ParamRef::ParamRef(
+  const ap_macro_param_ref_t& paramRef
+) : m_paramRef(paramRef)
+{
+}
+
+ap_macro_param_ref_t
+AnmlMacro::ParamRef::operator*(
+) const
+{
+  return m_paramRef;
+}
+
+AnmlMacro::ParamRef::~ParamRef(
+)
+{
+  m_paramRef = 0;
 }
 
 } // namespace ap

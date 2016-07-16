@@ -4,6 +4,7 @@
 #include "AnmlMacro.hpp"
 #include "AnmlNetwork.hpp"
 #include "Automaton.hpp"
+#include "ElementRef.hpp"
 
 #include <string>
 

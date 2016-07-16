@@ -2,11 +2,6 @@ CXX = g++
 LINKER = g++
 TARGETLIB	= libapsdk.so
 
-#LIBS:= -lboost_filesystem\
-       -lboost_program_options\
-			 -lboost_regex\
-       -lboost_system
-
 LIBS := -lapexec\
 			  -lapcompile
 

@@ -1,6 +1,9 @@
 #ifndef APSDK_AUTOMATON_HPP_
 #define APSDK_AUTOMATON_HPP_
 
+#include "ElementRef.hpp"
+#include "SymbolChange.hpp"
+
 #include <string>
 
 #include <micron/ap/ap_anml.h>
@@ -21,11 +24,11 @@ public:
 
   Automaton(Automaton&&);
 
-  void
+  ElementRef
   getElementRef(const std::string&) const;
 
   void
-  setSymbol();
+  setSymbol(SymbolChange&);
 
   void
   save(const std::string&) const;

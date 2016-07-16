@@ -30,27 +30,29 @@ Automaton::Automaton(
 
 Automaton::Automaton(
   Automaton&& that
-) : m_automaton(std::move(that.m_automaton)),
-    m_elementMap(std::move(that.m_elementMap))
+) : m_automaton(that.m_automaton),
+    m_elementMap(that.m_elementMap)
 {
   that.m_automaton = 0;
   that.m_elementMap = 0;
 }
 
-void
+ElementRef
 Automaton::getElementRef(
   const std::string& elementId
 ) const
 {
-  ap_anml_element_ref_t* elementRef = 0;
-  AP_GetElementRefFromElementId(m_elementMap, elementRef, elementId.c_str());
+  ap_anml_element_ref_t elementRef;
+  AP_GetElementRefFromElementId(m_elementMap, &elementRef, elementId.c_str());
+  return ElementRef(elementRef);
 }
 
 void
 Automaton::setSymbol(
+  SymbolChange& changes
 )
 {
-  AP_SetSymbol(m_automaton, m_elementMap, 0, 0);
+  AP_SetSymbol(m_automaton, m_elementMap, *changes, changes.count());
 }
 
 void

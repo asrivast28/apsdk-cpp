@@ -10,6 +10,7 @@ cppLibs = [
            ]
 
 srcFiles = [
+            'SymbolChange.cpp',
             'AnmlMacro.cpp',
             'AnmlNetwork.cpp',
             'Automaton.cpp',

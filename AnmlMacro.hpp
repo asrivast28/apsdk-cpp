@@ -9,6 +9,9 @@ namespace ap {
 
 class AnmlMacro {
 public:
+  class ParamRef;
+
+public:
   AnmlMacro();
 
   AnmlMacro(const ap_macro_def_t&);
@@ -18,7 +21,7 @@ public:
   void
   setMacroDefToBeCompiled() const;
 
-  void
+  ParamRef 
   getParamFromName(const std::string&) const;
 
   struct ap_anml_element
@@ -29,6 +32,23 @@ public:
 private:
   ap_macro_def_t m_macro;
 }; // class AnmlMacro
+
+class AnmlMacro::ParamRef {
+public:
+  ParamRef();
+
+  ParamRef(const ap_macro_param_ref_t&);
+
+  ParamRef(const ParamRef&);
+
+  ap_macro_param_ref_t
+  operator*() const;
+
+  ~ParamRef();
+
+private:
+  ap_macro_param_ref_t m_paramRef;
+}; // class AnmlMacro::ParamRef
 
 } // namespace ap
 
