@@ -7,16 +7,15 @@
 namespace ap {
 
 Anml::Anml(
-)
+) : m_anml(AP_CreateAnml())
 {
-  m_anml = AP_CreateAnml();
 }
 
 Anml::Anml(
-  const Anml&& other
-)
+  Anml&& that
+) : m_anml(std::move(that.m_anml))
 {
-  m_anml = other.m_anml;
+  that.m_anml = 0;
 }
 
 AnmlMacro
@@ -48,19 +47,22 @@ Anml::compileMacros(
 }
 
 Automaton
-Anml::compile(
+Anml::compileAnml(
 ) const
 {
-  ap_automaton_t* automaton = 0;
-  ap_element_map_t* elementMap = 0;
-  AP_CompileAnml(m_anml, automaton, elementMap, 0, 0, AP_OPT_DEFAULT, 0);
+  ap_automaton_t automaton;
+  ap_element_map_t elementMap;
+  AP_CompileAnml(m_anml, &automaton, &elementMap, 0, 0, AP_OPT_DEFAULT, 0);
   return Automaton(automaton, elementMap);
 }
 
 Anml::~Anml(
 )
 {
-  AP_DestroyAnml(m_anml);
+  if (m_anml != 0) {
+    AP_DestroyAnml(m_anml);
+  }
+  m_anml = 0;
 }
 
 } // namespace ap

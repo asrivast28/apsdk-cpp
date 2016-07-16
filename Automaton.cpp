@@ -1,6 +1,6 @@
 #include "Automaton.hpp"
 
-#include <cstdio>
+#include <iostream>
 
 #include <micron/ap/ap_load.h>
 #include <micron/ap/ap_element_map.h>
@@ -15,19 +15,26 @@
 namespace ap {
 
 Automaton::Automaton(
-  ap_automaton_t* automaton,
-  ap_element_map_t* elementMap
+) : m_automaton(0),
+    m_elementMap(0)
+{
+}
+
+Automaton::Automaton(
+  const ap_automaton_t& automaton,
+  const ap_element_map_t& elementMap
 ) : m_automaton(automaton),
     m_elementMap(elementMap)
 {
 }
 
 Automaton::Automaton(
-  const Automaton&& other
-)
+  Automaton&& that
+) : m_automaton(std::move(that.m_automaton)),
+    m_elementMap(std::move(that.m_elementMap))
 {
-  m_automaton = other.m_automaton;
-  m_elementMap = other.m_elementMap;
+  that.m_automaton = 0;
+  that.m_elementMap = 0;
 }
 
 void
@@ -36,14 +43,14 @@ Automaton::getElementRef(
 ) const
 {
   ap_anml_element_ref_t* elementRef = 0;
-  AP_GetElementRefFromElementId(*m_elementMap, elementRef, elementId.c_str());
+  AP_GetElementRefFromElementId(m_elementMap, elementRef, elementId.c_str());
 }
 
 void
 Automaton::setSymbol(
 )
 {
-  AP_SetSymbol(*m_automaton, *m_elementMap, 0, 0);
+  AP_SetSymbol(m_automaton, m_elementMap, 0, 0);
 }
 
 void
@@ -57,17 +64,34 @@ Automaton::save(
 #else
 	fd = CreateFileA(fileName.c_str(), GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 #endif
-  AP_Save(*m_automaton, fd);
+  AP_Save(m_automaton, fd);
 }
 
+void
+Automaton::printInfo(
+) const
+{
+  struct ap_automaton_info info;
+  AP_GetInfo(m_automaton, &info, 0); 
+  std::cout << "ste_grp_used = " << info.ste_grp_used << std::endl;
+  std::cout << "ste_count = " << info.ste_count<< std::endl;
+  std::cout << "match_res = " << info.match_res<< std::endl;
+  std::cout << "blocks_used = " << info.blocks_used<< std::endl;
+  std::cout << "blocks_rect = " << info.blocks_rect<< std::endl;
+
+}
 
 Automaton::~Automaton(
 )
 {
-  AP_Destroy(*m_automaton);
-  AP_DestroyElementMap(*m_elementMap);
-  m_automaton = 0;
-  m_elementMap = 0;
+  if (m_automaton != 0) {
+    AP_Destroy(m_automaton);
+    m_automaton = 0;
+  }
+  if (m_elementMap != 0) {
+    AP_DestroyElementMap(m_elementMap);
+    m_elementMap = 0;
+  }
 }
 
 } // namespace ap

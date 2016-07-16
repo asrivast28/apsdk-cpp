@@ -9,7 +9,9 @@ namespace ap {
 
 class Automaton {
 public:
-  Automaton(ap_automaton_t*, ap_element_map_t*);
+  Automaton();
+
+  Automaton(const ap_automaton_t&, const ap_element_map_t&);
 
   /**
    * Copying may result in destruction of the
@@ -17,7 +19,7 @@ public:
    */
   Automaton(const Automaton&) = delete;
 
-  Automaton(const Automaton&&);
+  Automaton(Automaton&&);
 
   void
   getElementRef(const std::string&) const;
@@ -28,11 +30,14 @@ public:
   void
   save(const std::string&) const;
 
+  void
+  printInfo() const;
+
   ~Automaton();
 
 private:
-  ap_automaton_t* m_automaton;
-  ap_element_map_t* m_elementMap;
+  ap_automaton_t m_automaton;
+  ap_element_map_t m_elementMap;
 }; // class Automaton
 
 } // namespace ap

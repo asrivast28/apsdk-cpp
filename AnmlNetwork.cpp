@@ -11,10 +11,9 @@ AnmlNetwork::AnmlNetwork(
 }
 
 AnmlNetwork::AnmlNetwork(
-  const AnmlNetwork& other
-)
+  const AnmlNetwork& that
+) : m_network(that.m_network)
 {
-  m_network = other.m_network;
 }
 
 void
@@ -26,8 +25,8 @@ AnmlNetwork::addMacroRef(
   struct ap_anml_element element = macro.getAnmlElement();
   element.id = anmlId.c_str();
 
-  ap_anml_element_ref_t* elementRef = 0;
-  AP_AddAnmlElement(m_network, elementRef, &element);
+  ap_anml_element_ref_t elementRef;
+  AP_AddAnmlElement(m_network, &elementRef, &element);
 }
 
 void
@@ -36,13 +35,6 @@ AnmlNetwork::exportAnml(
 ) const
 {
   AP_ExportAnml(m_network, fileName.c_str(), 0);
-}
-
-ap_anml_network_t*
-AnmlNetwork::operator*(
-)
-{
-  return &m_network;
 }
 
 AnmlNetwork::~AnmlNetwork(

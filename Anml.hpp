@@ -21,7 +21,7 @@ public:
    */
   Anml(const Anml&) = delete;
 
-  Anml(const Anml&&);
+  Anml(Anml&&);
 
   AnmlMacro
   loadMacro(const std::string&);
@@ -33,7 +33,7 @@ public:
   compileMacros() const;
 
   Automaton
-  compile() const;
+  compileAnml() const;
 
   ~Anml();
 

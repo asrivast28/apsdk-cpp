@@ -5,16 +5,20 @@
 namespace ap {
 
 AnmlMacro::AnmlMacro(
+) : m_macro(0)
+{
+}
+
+AnmlMacro::AnmlMacro(
   const ap_macro_def_t& macro
 ) : m_macro(macro)
 {
 }
 
 AnmlMacro::AnmlMacro(
-  const AnmlMacro& other
-)
+  const AnmlMacro& that
+) : m_macro(that.m_macro)
 {
-  m_macro = other.m_macro;
 }
 
 void
@@ -43,13 +47,6 @@ AnmlMacro::getAnmlElement(
   element.macro_ref = m_macro;
 
   return element;
-}
-
-ap_macro_def_t*
-AnmlMacro::operator*(
-)
-{
-  return &m_macro;
 }
 
 AnmlMacro::~AnmlMacro(

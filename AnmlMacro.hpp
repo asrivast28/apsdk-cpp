@@ -9,6 +9,8 @@ namespace ap {
 
 class AnmlMacro {
 public:
+  AnmlMacro();
+
   AnmlMacro(const ap_macro_def_t&);
 
   AnmlMacro(const AnmlMacro&);
@@ -21,9 +23,6 @@ public:
 
   struct ap_anml_element
   getAnmlElement() const;
-
-  ap_macro_def_t*
-  operator*();
 
   ~AnmlMacro();
 

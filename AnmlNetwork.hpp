@@ -21,9 +21,6 @@ public:
   void
   exportAnml(const std::string&) const;
 
-  ap_anml_network_t*
-  operator*();
-
   ~AnmlNetwork();
 
 private:
