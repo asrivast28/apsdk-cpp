@@ -13,7 +13,7 @@ namespace ap {
 
 class SymbolChange {
 public:
-  SymbolChange();
+  SymbolChange(unsigned);
 
   void
   add(const ElementRef&, const AnmlMacro::ParamRef&, const std::string&);
@@ -29,6 +29,7 @@ public:
 private:
   std::vector<struct ap_symbol_change> m_changes;
   std::vector<std::string> m_symbols;
+  unsigned m_index;
 }; // class SymbolChange
 
 } // namespace ap

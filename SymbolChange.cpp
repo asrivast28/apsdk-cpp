@@ -1,10 +1,14 @@
 #include "SymbolChange.hpp"
 
+#include <cassert>
+
 namespace ap {
 
 SymbolChange::SymbolChange(
-) : m_changes(),
-    m_symbols()
+  unsigned maxChanges 
+) : m_changes(maxChanges),
+    m_symbols(maxChanges),
+    m_index(0)
 {
 }
 
@@ -15,21 +19,23 @@ SymbolChange::add(
   const std::string& symbol
 )
 {
-  m_symbols.push_back(symbol);
+  assert(m_index < m_symbols.size());
 
-  struct ap_symbol_change change;
+  m_symbols[m_index] = symbol;
+
+  struct ap_symbol_change& change = m_changes[m_index];
   change.element_ref = *elementRef;
   change.symbol_set = m_symbols.rbegin()->c_str();
   change.param_ref = *paramRef;
 
-  m_changes.push_back(change);
+  ++m_index;
 }
 
 unsigned
 SymbolChange::count(
 ) const
 {
-  return m_changes.size();
+  return m_index;
 }
 
 struct ap_symbol_change*
