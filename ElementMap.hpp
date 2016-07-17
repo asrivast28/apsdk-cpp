@@ -9,6 +9,9 @@
 
 namespace ap {
 
+/**
+ * @brief  Wrapper class for ap_element_map_t functionality. 
+ */
 class ElementMap {
 public:
   ElementMap();
@@ -37,6 +40,7 @@ public:
   ~ElementMap();
 
 private:
+  // ap_element_map_t instance that this object refers to.
   ap_element_map_t m_elementMap;
 }; // class ElementMap
 

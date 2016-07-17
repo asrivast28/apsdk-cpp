@@ -7,6 +7,9 @@
 
 namespace ap {
 
+/**
+ * @brief  Wrapper class for ap_element_ref_t functionality. 
+ */
 class ElementRef {
 public:
   ElementRef();
@@ -21,6 +24,7 @@ public:
   ~ElementRef();
 
 private:
+  // ap_element_ref_t instance that this object refers to.
   ap_anml_element_ref_t m_elementRef;
 }; // class ElementRef
 

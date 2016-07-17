@@ -13,6 +13,9 @@
 
 namespace ap {
 
+/**
+ * @brief  Wrapper class for ap_anml_t functionality. 
+ */
 class Anml {
 public:
   Anml();
@@ -40,6 +43,7 @@ public:
   ~Anml();
 
 private:
+  // ap_anml_t instance that this object refers to.
   ap_anml_t m_anml;
 }; // class Anml
 

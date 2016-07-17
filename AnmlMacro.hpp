@@ -7,6 +7,9 @@
 
 namespace ap {
 
+/**
+ * @brief  Wrapper class for ap_macro_def_t functionality.
+ */
 class AnmlMacro {
 public:
   class ParamRef;
@@ -30,9 +33,13 @@ public:
   ~AnmlMacro();
 
 private:
+  // ap_macro_def_t instance that this object refers to.
   ap_macro_def_t m_macro;
 }; // class AnmlMacro
 
+/**
+ * @brief  Wrapper class for ap_macro_param_ref_t functionality.
+ */
 class AnmlMacro::ParamRef {
 public:
   ParamRef();
@@ -47,6 +54,7 @@ public:
   ~ParamRef();
 
 private:
+  // ap_macro_param_ref_t instance that this object refers to.
   ap_macro_param_ref_t m_paramRef;
 }; // class AnmlMacro::ParamRef
 

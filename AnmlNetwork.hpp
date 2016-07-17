@@ -9,6 +9,9 @@
 
 namespace ap {
 
+/**
+ * @brief  Wrapper class for ap_anml_network_t functionality. 
+ */
 class AnmlNetwork {
 public:
   AnmlNetwork(const ap_anml_network_t&);
@@ -24,6 +27,7 @@ public:
   ~AnmlNetwork();
 
 private:
+  // ap_anml_network_t instance that this object refers to.
   ap_anml_network_t m_network;
 }; // class AnmlNetwork
 

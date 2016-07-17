@@ -10,6 +10,9 @@
 
 namespace ap {
 
+/**
+ * @brief  Wrapper class for ap_automaton_t functionality. 
+ */
 class Automaton {
 public:
   Automaton();
@@ -38,6 +41,7 @@ public:
   ~Automaton();
 
 private:
+  // ap_automaton_t instance that this object refers to.
   ap_automaton_t m_automaton;
 }; // class Automaton
 
