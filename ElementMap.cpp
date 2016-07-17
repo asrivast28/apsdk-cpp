@@ -10,17 +10,30 @@
 
 namespace ap {
 
+/**
+ * @brief  Default constructor.
+ */
 ElementMap::ElementMap(
 ) : m_elementMap(0)
 {
 }
 
+/**
+ * @brief  Constructor for creating the object with a given
+ *         ap_element_map_t instance.
+ */
 ElementMap::ElementMap(
   const ap_element_map_t& elementMap
 ) : m_elementMap(elementMap)
 {
 }
 
+/**
+ * @brief  Constructor for creating the object by reading element map
+ *         from the given file.
+ *
+ * @param fileName  Name of the file from which element map is to be read.
+ */
 ElementMap::ElementMap(
   const std::string& fileName
 ) : m_elementMap(0)
@@ -39,6 +52,9 @@ ElementMap::ElementMap(
 #endif
 }
 
+/**
+ * @brief  Move constructor. 
+ */
 ElementMap::ElementMap(
   ElementMap&& that
 ) : m_elementMap(that.m_elementMap)
@@ -46,6 +62,13 @@ ElementMap::ElementMap(
   that.m_elementMap = 0;
 }
 
+/**
+ * @brief  Gets element reference corresponding to the given element id.
+ *
+ * @param elementId  Id of the element whose element ref is to be found.
+ *
+ * @return  ElementRef corresponding to the reference. 
+ */
 ElementRef
 ElementMap::getElementRef(
   const std::string& elementId
@@ -56,6 +79,11 @@ ElementMap::getElementRef(
   return ElementRef(elementRef);
 }
 
+/**
+ * @brief  Saves the element map to the given file.
+ *
+ * @param fileName  Name of the file in which element map is to be saved.
+ */
 void
 ElementMap::save(
   const std::string& fileName
@@ -75,6 +103,11 @@ ElementMap::save(
 #endif
 }
 
+/**
+ * @brief  Overloaded indirection operator implementation.
+ *
+ * @return  Returns the underlying ap_element_map_t instance.
+ */
 ap_element_map_t
 ElementMap::operator*(
 )
@@ -82,9 +115,13 @@ ElementMap::operator*(
   return m_elementMap;
 }
 
+/**
+ * @brief  Default destructor.
+ */
 ElementMap::~ElementMap(
 )
 {
+  // Destroy the element map only if it points to a valid instance.
   if (m_elementMap != 0) {
     AP_DestroyElementMap(m_elementMap);
     m_elementMap = 0;

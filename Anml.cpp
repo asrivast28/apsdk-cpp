@@ -6,18 +6,32 @@
 
 namespace ap {
 
+/**
+ * @brief  Initializes the instance with an ANML workspace.
+ */
 Anml::Anml(
 ) : m_anml(AP_CreateAnml())
 {
 }
 
+/**
+ * @brief  Move constructor.
+ */
 Anml::Anml(
   Anml&& that
 ) : m_anml(that.m_anml)
 {
+  // Ensure that the other instance doesn't destroy the workspace.
   that.m_anml = 0;
 }
 
+/**
+ * @brief  Loads macro from the given ANML file.
+ *
+ * @param fileName  Name of the ANML file from which macro is to be loaded.
+ *
+ * @return  Returns AnmlMacro instance for the loaded macro. 
+ */
 AnmlMacro
 Anml::loadMacro(
   const std::string& fileName
@@ -29,6 +43,13 @@ Anml::loadMacro(
 }
 
 
+/**
+ * @brief  Creates an ANML network in this workspace.
+ *
+ * @param anmlId  ANML id of the network to be created.
+ *
+ * @return  Returns AnmlNetwork instance for the created network. 
+ */
 AnmlNetwork
 Anml::createNetwork(
   const std::string& anmlId
@@ -39,6 +60,9 @@ Anml::createNetwork(
   return AnmlNetwork(network);
 }
 
+/**
+ * @brief  Precompiles all the loaded macros.
+ */
 void
 Anml::compileMacros(
 ) const
@@ -46,6 +70,11 @@ Anml::compileMacros(
   AP_CompileMacros(m_anml, 0, 0, 0, AP_OPT_DEFAULT, 0);
 }
 
+/**
+ * @brief  Compiles the ANML workspace.
+ *
+ * @return  Returns Automaton and ElementMap instances generated as a result of the compilation. 
+ */
 std::pair<Automaton, ElementMap>
 Anml::compileAnml(
 ) const
@@ -56,6 +85,9 @@ Anml::compileAnml(
   return std::pair<Automaton, ElementMap>(Automaton(automaton), ElementMap(elementMap));
 }
 
+/**
+ * @brief  Destuctor for destroying the associated ANML workspace.
+ */
 Anml::~Anml(
 )
 {

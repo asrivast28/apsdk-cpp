@@ -13,17 +13,30 @@
 
 namespace ap {
 
+/**
+ * @brief  Default constructor.
+ */
 Automaton::Automaton(
 ) : m_automaton(0) 
 {
 }
 
+/**
+ * @brief  Constructor for creating the object with a given
+ *         ap_automaton_t instance.
+ */
 Automaton::Automaton(
   const ap_automaton_t& automaton
 ) : m_automaton(automaton)
 {
 }
 
+/**
+ * @brief  Constructor for creating the object by reading automaton 
+ *         from the given file.
+ *
+ * @param fileName  Name of the file from which automaton is to be read.
+ */
 Automaton::Automaton(
   const std::string& fileName
 ) : m_automaton(0)
@@ -42,6 +55,9 @@ Automaton::Automaton(
 #endif
 }
 
+/**
+ * @brief  Move constructor. 
+ */
 Automaton::Automaton(
   Automaton&& that
 ) : m_automaton(that.m_automaton)
@@ -49,6 +65,12 @@ Automaton::Automaton(
   that.m_automaton = 0;
 }
 
+/**
+ * @brief  Substitutes symbols in the automaton. 
+ *
+ * @param elementMap  Element map for the substitution.
+ * @param changes     Array of all the changes.
+ */
 void
 Automaton::setSymbol(
   ElementMap& elementMap, 
@@ -58,6 +80,11 @@ Automaton::setSymbol(
   AP_SetSymbol(m_automaton, *elementMap, *changes, changes.count());
 }
 
+/**
+ * @brief  Saves the automaton to the given file.
+ *
+ * @param fileName  Name of the file in which automaton is to be saved.
+ */
 void
 Automaton::save(
   const std::string& fileName
@@ -77,6 +104,9 @@ Automaton::save(
 #endif
 }
 
+/**
+ * @brief  Prints information about the automaton.
+ */
 void
 Automaton::printInfo(
 ) const
@@ -93,9 +123,13 @@ Automaton::printInfo(
   std::cout << "clock_divisor = " << info.clock_divisor << std::endl;
 }
 
+/**
+ * @brief  Default destructor.
+ */
 Automaton::~Automaton(
 )
 {
+  // Destroy the automaton only if it points to a valid instance.
   if (m_automaton != 0) {
     AP_Destroy(m_automaton);
     m_automaton = 0;
