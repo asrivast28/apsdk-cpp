@@ -1,5 +1,7 @@
 #include "ElementMap.hpp"
 
+#include "APCall.hpp"
+
 #include <micron/ap/ap_element_map.h>
 #include <micron/ap/sys/platform.h>
 #if defined(LINUX32) || defined(LINUX64)
@@ -44,7 +46,7 @@ ElementMap::ElementMap(
 #else
 	//fd = CreateFileA(fileName.c_str(), GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 #endif
-  AP_RestoreElementMap(&m_elementMap, fd);
+  APCALL_CHECK(AP_RestoreElementMap)(&m_elementMap, fd);
 #if defined(LINUX32) || defined(LINUX64)
   close(fd);
 #else
@@ -75,7 +77,7 @@ ElementMap::getElementRef(
 ) const
 {
   ap_anml_element_ref_t elementRef;
-  AP_GetElementRefFromElementId(m_elementMap, &elementRef, elementId.c_str());
+  APCALL_CHECK(AP_GetElementRefFromElementId)(m_elementMap, &elementRef, elementId.c_str());
   return ElementRef(elementRef);
 }
 
@@ -95,7 +97,7 @@ ElementMap::save(
 #else
 	fd = CreateFileA(fileName.c_str(), GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 #endif
-  AP_SaveElementMap(m_elementMap, fd);
+  APCALL_CHECK(AP_SaveElementMap)(m_elementMap, fd);
 #if defined(LINUX32) || defined(LINUX64)
   close(fd);
 #else
@@ -123,7 +125,7 @@ ElementMap::~ElementMap(
 {
   // Destroy the element map only if it points to a valid instance.
   if (m_elementMap != 0) {
-    AP_DestroyElementMap(m_elementMap);
+    APCALL_CHECK(AP_DestroyElementMap)(m_elementMap);
     m_elementMap = 0;
   }
 }

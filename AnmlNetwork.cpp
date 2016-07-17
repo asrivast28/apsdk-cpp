@@ -1,5 +1,6 @@
 #include "AnmlNetwork.hpp"
 
+#include "APCall.hpp"
 
 
 namespace ap {
@@ -39,7 +40,7 @@ AnmlNetwork::addMacroRef(
   element.id = anmlId.c_str();
 
   ap_anml_element_ref_t elementRef;
-  AP_AddAnmlElement(m_network, &elementRef, &element);
+  APCALL_CHECK(AP_AddAnmlElement)(m_network, &elementRef, &element);
 }
 
 /**
@@ -52,7 +53,7 @@ AnmlNetwork::exportAnml(
   const std::string& fileName
 ) const
 {
-  AP_ExportAnml(m_network, fileName.c_str(), 0);
+  APCALL_CHECK(AP_ExportAnml)(m_network, fileName.c_str(), static_cast<const char*>(0));
 }
 
 /**

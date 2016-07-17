@@ -1,5 +1,7 @@
 #include "AnmlMacro.hpp"
 
+#include "APCall.hpp"
+
 #include <cstring>
 
 namespace ap {
@@ -44,7 +46,7 @@ AnmlMacro::getParamFromName(
 ) const
 {
   ap_macro_param_ref_t param;
-  AP_GetMacroParamFromName(m_macro, &param, name.c_str());
+  APCALL_CHECK(AP_GetMacroParamFromName)(m_macro, &param, name.c_str());
   return ParamRef(param);
 }
 
@@ -55,7 +57,7 @@ void
 AnmlMacro::setMacroDefToBeCompiled(
 ) const
 {
-  AP_SetMacroDefToBeCompiled(m_macro);
+  APCALL_CHECK(AP_SetMacroDefToBeCompiled)(m_macro);
 }
 
 /**

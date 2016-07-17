@@ -1,5 +1,7 @@
 #include "Automaton.hpp"
 
+#include "APCall.hpp"
+
 #include <iostream>
 
 #include <micron/ap/ap_load.h>
@@ -47,7 +49,7 @@ Automaton::Automaton(
 #else
 	//fd = CreateFileA(fileName.c_str(), GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 #endif
-  AP_Restore(&m_automaton, fd);
+  APCALL_CHECK(AP_Restore)(&m_automaton, fd);
 #if defined(LINUX32) || defined(LINUX64)
   close(fd);
 #else
@@ -77,7 +79,7 @@ Automaton::setSymbol(
   SymbolChange& changes
 )
 {
-  AP_SetSymbol(m_automaton, *elementMap, *changes, changes.count());
+  APCALL_CHECK(AP_SetSymbol)(m_automaton, *elementMap, *changes, changes.count());
 }
 
 /**
@@ -96,7 +98,7 @@ Automaton::save(
 #else
 	fd = CreateFileA(fileName.c_str(), GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 #endif
-  AP_Save(m_automaton, fd);
+  APCALL_CHECK(AP_Save)(m_automaton, fd);
 #if defined(LINUX32) || defined(LINUX64)
   close(fd);
 #else
@@ -112,7 +114,7 @@ Automaton::printInfo(
 ) const
 {
   struct ap_automaton_info info;
-  AP_GetInfo(m_automaton, &info, 0); 
+  APCALL_CHECK(AP_GetInfo)(m_automaton, &info, 0); 
   std::cout << "blocks_rect = " << info.blocks_rect<< std::endl;
   std::cout << "blocks_used = " << info.blocks_used<< std::endl;
   std::cout << "ste_count = " << info.ste_count<< std::endl;
@@ -131,7 +133,7 @@ Automaton::~Automaton(
 {
   // Destroy the automaton only if it points to a valid instance.
   if (m_automaton != 0) {
-    AP_Destroy(m_automaton);
+    APCALL_CHECK(AP_Destroy)(m_automaton);
     m_automaton = 0;
   }
 }

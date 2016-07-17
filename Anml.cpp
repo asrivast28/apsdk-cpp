@@ -2,6 +2,7 @@
 
 #include "AnmlMacro.hpp"
 #include "AnmlNetwork.hpp"
+#include "APCall.hpp"
 
 
 namespace ap {
@@ -38,7 +39,14 @@ Anml::loadMacro(
 )
 {
   ap_macro_def_t macro;
-  AP_LoadAnmlMacro(m_anml, &macro, 0, fileName.c_str(), 0, AP_OPT_DEFAULT, 0);
+  int lineNumber = 0;
+  try {
+    APCALL_CHECK(AP_LoadAnmlMacro)(m_anml, &macro, &lineNumber, fileName.c_str(), static_cast<ap_cbinfo_t*>(0), AP_OPT_DEFAULT, static_cast<const char*>(0));
+  } 
+  catch(std::runtime_error& e) {
+    throw std::runtime_error(std::string(e.what()) + " In " + fileName + " on line " + std::to_string(lineNumber) + ".");
+  }
+
   return AnmlMacro(macro);
 }
 
@@ -56,7 +64,7 @@ Anml::createNetwork(
 )
 {
   ap_anml_network_t network;
-  AP_CreateAutomataNetwork(m_anml, &network, anmlId.c_str());
+  APCALL_CHECK(AP_CreateAutomataNetwork)(m_anml, &network, anmlId.c_str());
   return AnmlNetwork(network);
 }
 
@@ -67,7 +75,7 @@ void
 Anml::compileMacros(
 ) const
 {
-  AP_CompileMacros(m_anml, 0, 0, 0, AP_OPT_DEFAULT, 0);
+  APCALL_CHECK(AP_CompileMacros)(m_anml, static_cast<ap_macro_def_t*>(0), static_cast<ap_anml_element_ref_t*>(0), static_cast<ap_cbinfo_t*>(0), AP_OPT_DEFAULT, 0);
 }
 
 /**
@@ -81,7 +89,7 @@ Anml::compileAnml(
 {
   ap_automaton_t automaton;
   ap_element_map_t elementMap;
-  AP_CompileAnml(m_anml, &automaton, &elementMap, 0, 0, AP_OPT_DEFAULT, 0);
+  APCALL_CHECK(AP_CompileAnml)(m_anml, &automaton, &elementMap, static_cast<ap_anml_element_ref_t*>(0), static_cast<ap_cbinfo_t*>(0), AP_OPT_DEFAULT, 0);
   return std::pair<Automaton, ElementMap>(Automaton(automaton), ElementMap(elementMap));
 }
 
@@ -92,7 +100,7 @@ Anml::~Anml(
 )
 {
   if (m_anml != 0) {
-    AP_DestroyAnml(m_anml);
+    APCALL_CHECK(AP_DestroyAnml)(m_anml);
   }
   m_anml = 0;
 }

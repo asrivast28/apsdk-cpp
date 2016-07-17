@@ -40,7 +40,7 @@ SymbolChange::add(
   // Add symbol change.
   struct ap_symbol_change& change = m_changes[m_index];
   change.element_ref = *elementRef;
-  change.symbol_set = m_symbols.rbegin()->c_str();
+  change.symbol_set = m_symbols[m_index].c_str();
   change.param_ref = *paramRef;
 
   // Increase the count of added changes.
