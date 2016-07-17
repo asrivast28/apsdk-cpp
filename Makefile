@@ -12,9 +12,11 @@ LIBS := -lapexec\
 CXXFLAGS = -fPIC -Wall -std=c++0x -g
 LDFLAGS = -shared -g
 
-SOURCES:= AnmlMacro.cpp\
+SOURCES:= SymbolChange.cpp\
+					AnmlMacro.cpp\
 					AnmlNetwork.cpp\
 					Automaton.cpp\
+					ElementMap.cpp\
 					Anml.cpp
 
 OBJECTS = $(patsubst %.cpp,%.o,$(SOURCES))

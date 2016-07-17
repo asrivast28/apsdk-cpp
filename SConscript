@@ -14,6 +14,7 @@ srcFiles = [
             'AnmlMacro.cpp',
             'AnmlNetwork.cpp',
             'Automaton.cpp',
+            'ElementMap.cpp',
             'Anml.cpp',
             ]
 

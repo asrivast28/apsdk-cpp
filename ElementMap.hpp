@@ -1,0 +1,45 @@
+#ifndef APSDK_ELEMENTMAP_HPP_
+#define APSDK_ELEMENTMAP_HPP_
+
+#include "ElementRef.hpp"
+
+#include <string>
+
+#include <micron/ap/ap_anml.h>
+
+namespace ap {
+
+class ElementMap {
+public:
+  ElementMap();
+
+  ElementMap(const ap_element_map_t&);
+
+  ElementMap(const std::string&);
+
+  /**
+   * Copying may result in destruction of the
+   * orginal object. Do NOT allow copying.
+   */
+  ElementMap(const ElementMap&) = delete;
+
+  ElementMap(ElementMap&&);
+
+  ElementRef
+  getElementRef(const std::string&) const;
+
+  void
+  save(const std::string&) const;
+
+  ap_element_map_t
+  operator*();
+
+  ~ElementMap();
+
+private:
+  ap_element_map_t m_elementMap;
+}; // class ElementMap
+
+} // namespace ap
+
+#endif // APSDK_ELEMENTMAP_HPP_

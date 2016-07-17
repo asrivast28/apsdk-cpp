@@ -46,14 +46,14 @@ Anml::compileMacros(
   AP_CompileMacros(m_anml, 0, 0, 0, AP_OPT_DEFAULT, 0);
 }
 
-Automaton
+std::pair<Automaton, ElementMap>
 Anml::compileAnml(
 ) const
 {
   ap_automaton_t automaton;
   ap_element_map_t elementMap;
   AP_CompileAnml(m_anml, &automaton, &elementMap, 0, 0, AP_OPT_DEFAULT, 0);
-  return Automaton(automaton, elementMap);
+  return std::pair<Automaton, ElementMap>(Automaton(automaton), ElementMap(elementMap));
 }
 
 Anml::~Anml(

@@ -4,6 +4,7 @@
 #include "AnmlMacro.hpp"
 #include "AnmlNetwork.hpp"
 #include "Automaton.hpp"
+#include "ElementMap.hpp"
 #include "ElementRef.hpp"
 
 #include <string>
@@ -33,7 +34,7 @@ public:
   void
   compileMacros() const;
 
-  Automaton
+  std::pair<Automaton, ElementMap>
   compileAnml() const;
 
   ~Anml();

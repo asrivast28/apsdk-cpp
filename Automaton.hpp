@@ -1,7 +1,7 @@
 #ifndef APSDK_AUTOMATON_HPP_
 #define APSDK_AUTOMATON_HPP_
 
-#include "ElementRef.hpp"
+#include "ElementMap.hpp"
 #include "SymbolChange.hpp"
 
 #include <string>
@@ -14,7 +14,9 @@ class Automaton {
 public:
   Automaton();
 
-  Automaton(const ap_automaton_t&, const ap_element_map_t&);
+  Automaton(const ap_automaton_t&);
+
+  Automaton(const std::string&);
 
   /**
    * Copying may result in destruction of the
@@ -24,11 +26,8 @@ public:
 
   Automaton(Automaton&&);
 
-  ElementRef
-  getElementRef(const std::string&) const;
-
   void
-  setSymbol(SymbolChange&);
+  setSymbol(ElementMap&, SymbolChange&);
 
   void
   save(const std::string&) const;
@@ -40,7 +39,6 @@ public:
 
 private:
   ap_automaton_t m_automaton;
-  ap_element_map_t m_elementMap;
 }; // class Automaton
 
 } // namespace ap
