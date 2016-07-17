@@ -15,6 +15,7 @@ srcFiles = [
             'AnmlNetwork.cpp',
             'Automaton.cpp',
             'ElementMap.cpp',
+            'ElementRef.cpp',
             'Anml.cpp',
             ]
 

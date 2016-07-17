@@ -17,6 +17,7 @@ SOURCES:= SymbolChange.cpp\
 					AnmlNetwork.cpp\
 					Automaton.cpp\
 					ElementMap.cpp\
+					ElementRef.cpp\
 					Anml.cpp
 
 OBJECTS = $(patsubst %.cpp,%.o,$(SOURCES))

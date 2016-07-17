@@ -5,7 +5,6 @@
 #include "AnmlNetwork.hpp"
 #include "Automaton.hpp"
 #include "ElementMap.hpp"
-#include "ElementRef.hpp"
 
 #include <string>
 
