@@ -4,7 +4,7 @@
 #include "AnmlMacro.hpp"
 #include "ElementRef.hpp"
 
-#include <string>
+#include <array>
 #include <vector>
 
 #include <micron/ap/ap_reload.h>
@@ -16,10 +16,13 @@ namespace ap {
  */
 class SymbolChange {
 public:
+  typedef std::array<char, 2> HexType;
+
+public:
   SymbolChange(unsigned);
 
   void
-  add(const ElementRef&, const AnmlMacro::ParamRef&, const std::string&);
+  add(const ElementRef&, const AnmlMacro::ParamRef&, const HexType&);
 
   struct ap_symbol_change*
   operator*();

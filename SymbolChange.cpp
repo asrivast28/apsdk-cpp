@@ -28,14 +28,14 @@ void
 SymbolChange::add(
   const ElementRef& elementRef,
   const AnmlMacro::ParamRef& paramRef,
-  const std::string& symbol
+  const HexType& symbol
 )
 {
   // There should be space for another addition.
   assert(m_index < m_symbols.size());
 
   // Add symbol for availability of char*.
-  m_symbols[m_index] = symbol;
+  m_symbols[m_index].replace(3, 2, symbol.data(), 2);
 
   // Add symbol change.
   struct ap_symbol_change& change = m_changes[m_index];
