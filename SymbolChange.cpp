@@ -1,6 +1,7 @@
 #include "SymbolChange.hpp"
 
 #include <cassert>
+#include <cstring>
 
 namespace ap {
 
@@ -12,7 +13,7 @@ namespace ap {
 SymbolChange::SymbolChange(
   unsigned maxChanges 
 ) : m_changes(maxChanges),
-    m_symbols(maxChanges, "[\\x00]"),
+    m_symbols(maxChanges),
     m_index(0)
 {
 }
@@ -35,12 +36,13 @@ SymbolChange::add(
   assert(m_index < m_symbols.size());
 
   // Add symbol for availability of char*.
-  m_symbols[m_index].replace(3, 2, symbol.data(), 2);
+  std::string hexSymbol = "[\\x" + std::string(symbol.begin(), symbol.end()) + "]";
+  strcpy(m_symbols[m_index].data(), hexSymbol.c_str());
 
   // Add symbol change.
   struct ap_symbol_change& change = m_changes[m_index];
   change.element_ref = *elementRef;
-  change.symbol_set = m_symbols[m_index].c_str();
+  change.symbol_set = m_symbols[m_index].data();
   change.param_ref = *paramRef;
 
   // Increase the count of added changes.

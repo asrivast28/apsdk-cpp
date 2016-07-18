@@ -1,6 +1,7 @@
 #ifndef APSDK_APCALL_HPP_
 #define APSDK_APCALL_HPP_
 
+#include <iostream>
 #include <stdexcept>
 #include <string>
 
@@ -19,7 +20,10 @@ public:
   {
     int error = m_func(std::forward<Args>(args)...);
     if (error < 0) {
-      throw std::runtime_error("Error " + std::to_string(error) + " in call to " + m_funcName + ".");
+      throw std::runtime_error("Error code " + std::to_string(error) + " returned during call to " + m_funcName + ".");
+    }
+    else if (error > 0) {
+      std::cerr << "Warning code " + std::to_string(error) + " returned during call to " + m_funcName + "." << std::endl;
     }
     return error;
   }
