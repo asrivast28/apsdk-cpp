@@ -12,7 +12,7 @@ namespace ap {
 SymbolChange::SymbolChange(
   unsigned maxChanges 
 ) : m_changes(maxChanges),
-    m_symbols(maxChanges),
+    m_symbols(maxChanges, "[\\x00]"),
     m_index(0)
 {
 }
