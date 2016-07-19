@@ -23,20 +23,23 @@ SymbolChange::SymbolChange(
  *
  * @param elementRef  Reference of the element in which substitution is to be done.
  * @param paramRef    Reference of the parameter which is to be substituted.
- * @param symbol      Symbol with which the substitution is to be done.
+ * @param hexValue    Symbol with which the substitution is to be done.
+ * @param negation    Flag specifying if the symbol is to be negated. Defaults to false.
  */
 void
 SymbolChange::add(
   const ElementRef& elementRef,
   const AnmlMacro::ParamRef& paramRef,
-  const HexType& symbol
+  const HexType& hexValue,
+  const bool negation
 )
 {
   // There should be space for another addition.
   assert(m_index < m_symbols.size());
 
   // Add symbol for availability of char*.
-  std::string hexSymbol = "[\\x" + std::string(symbol.begin(), symbol.end()) + "]";
+  std::string hexSymbol("[" + std::string(negation ? "^" : "") + "\\x" +
+                        std::string(hexValue.begin(), hexValue.end()) + "]");
   strcpy(m_symbols[m_index].data(), hexSymbol.c_str());
 
   // Add symbol change.
