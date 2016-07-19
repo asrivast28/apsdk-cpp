@@ -21,11 +21,7 @@ public:
 
   Automaton(const std::string&);
 
-  /**
-   * Copying may result in destruction of the
-   * orginal object. Do NOT allow copying.
-   */
-  Automaton(const Automaton&) = delete;
+  Automaton(const Automaton&);
 
   Automaton(Automaton&&);
 

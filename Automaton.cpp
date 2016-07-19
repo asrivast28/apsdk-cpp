@@ -57,6 +57,13 @@ Automaton::Automaton(
 #endif
 }
 
+Automaton::Automaton(
+  const Automaton& that
+) : m_automaton(0)
+{
+  APCALL_CHECK(AP_Duplicate)(that.m_automaton, &m_automaton, 0);
+}
+
 /**
  * @brief  Move constructor. 
  */
