@@ -15,14 +15,15 @@ public:
   { }
 
   template <typename... Args>
-  int 
+  unsigned 
   operator()(Args&&... args)
   {
     int error = m_func(std::forward<Args>(args)...);
     if (error < 0) {
       throw std::runtime_error("Error code " + std::to_string(error) + " returned during call to " + m_funcName + ".");
     }
-    return error;
+    // The value of error is guaranteed to be greater than 0 at this point.
+    return static_cast<unsigned>(error);
   }
 
 private:

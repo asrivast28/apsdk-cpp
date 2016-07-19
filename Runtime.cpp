@@ -79,8 +79,8 @@ queryDeviceConfig(
   const std::string& deviceName
 )
 {
-  int loadRegions = APCALL_CHECK(AP_QueryDeviceConfig)(deviceName.c_str());
-  return static_cast<unsigned>(loadRegions);
+  unsigned loadRegions = APCALL_CHECK(AP_QueryDeviceConfig)(deviceName.c_str());
+  return loadRegions;
 }
 
 } // namespace runtime
