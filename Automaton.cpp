@@ -126,6 +126,18 @@ Automaton::printInfo(
 }
 
 /**
+ * @brief  Overloaded indirection operator implementation.
+ *
+ * @return  Returns the underlying ap_automaton_t instance.
+ */
+ap_automaton_t
+Automaton::operator*(
+)
+{
+  return m_automaton;
+}
+
+/**
  * @brief  Default destructor.
  */
 Automaton::~Automaton(

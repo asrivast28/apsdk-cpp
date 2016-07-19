@@ -22,9 +22,6 @@ public:
     if (error < 0) {
       throw std::runtime_error("Error code " + std::to_string(error) + " returned during call to " + m_funcName + ".");
     }
-    else if (error > 0) {
-      std::cerr << "Warning code " + std::to_string(error) + " returned during call to " + m_funcName + "." << std::endl;
-    }
     return error;
   }
 

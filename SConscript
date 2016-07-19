@@ -16,6 +16,7 @@ srcFiles = [
             'Automaton.cpp',
             'ElementMap.cpp',
             'ElementRef.cpp',
+            'Runtime.cpp',
             'Anml.cpp',
             ]
 

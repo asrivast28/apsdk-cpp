@@ -38,6 +38,9 @@ public:
   void
   printInfo() const;
 
+  ap_automaton_t
+  operator*();
+
   ~Automaton();
 
 private:
