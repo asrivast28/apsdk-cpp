@@ -21,6 +21,6 @@ srcFiles = [
             'Anml.cpp',
             ]
 
-#apsdk = env.StaticLibrary(target = libName, source = srcFiles, LIBS = cppLibs)
-apsdk = env.SharedLibrary(target = libName, source = srcFiles, LIBS = cppLibs)
+apsdk = env.StaticLibrary(target = libName, source = srcFiles, LIBS = cppLibs)
+#apsdk = env.SharedLibrary(target = libName, source = srcFiles, LIBS = cppLibs)
 Return("apsdk")
