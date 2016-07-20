@@ -15,6 +15,11 @@ namespace ap {
  */
 class Automaton {
 public:
+  // Device invalidates the Automaton object during loading.
+  // Therefore, Device needs to modify the underlying pointer.
+  friend class Device;
+
+public:
   Automaton();
 
   Automaton(const ap_automaton_t&);

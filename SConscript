@@ -17,6 +17,7 @@ srcFiles = [
             'ElementMap.cpp',
             'ElementRef.cpp',
             'Runtime.cpp',
+            'Device.cpp',
             'Anml.cpp',
             ]
 

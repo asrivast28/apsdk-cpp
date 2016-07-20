@@ -2,6 +2,8 @@
 
 #include "APCall.hpp"
 
+#include <vector>
+
 #include <micron/ap/ap_element_map.h>
 #include <micron/ap/sys/platform.h>
 #if defined(LINUX32) || defined(LINUX64)
@@ -79,6 +81,17 @@ ElementMap::getElementRef(
   ap_anml_element_ref_t elementRef;
   APCALL_CHECK(AP_GetElementRefFromElementId)(m_elementMap, &elementRef, elementId.c_str());
   return ElementRef(elementRef);
+}
+
+std::string
+ElementMap::getElementId(
+  const ElementRef& elementRef
+) const
+{
+  unsigned bufSize = APCALL_CHECK(AP_GetElementIdFromElementRef)(m_elementMap, static_cast<char*>(0), 0, *elementRef);
+  std::vector<char> elementId(bufSize+1, 0);
+  APCALL_CHECK(AP_GetElementIdFromElementRef)(m_elementMap, &elementId[0], bufSize, *elementRef);
+  return std::string(&elementId[0]);
 }
 
 /**

@@ -19,6 +19,7 @@ SOURCES:= SymbolChange.cpp\
 					ElementMap.cpp\
 					ElementRef.cpp\
 					Runtime.cpp\
+          Device.cpp\
 					Anml.cpp
 
 OBJECTS = $(patsubst %.cpp,%.o,$(SOURCES))

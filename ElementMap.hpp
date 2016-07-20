@@ -31,6 +31,9 @@ public:
   ElementRef
   getElementRef(const std::string&) const;
 
+  std::string
+  getElementId(const ElementRef&) const; 
+
   void
   save(const std::string&) const;
 
