@@ -48,10 +48,10 @@ Device::load(
  *
  * @param data  The data to be streamed to the device.
  */
-void
+std::vector<std::pair<ElementRef, size_t> >
 Device::search(
-  std::vector<unsigned char>& data, 
-  const ElementMap& elementMap
+  void* const data, 
+  const unsigned dataSize
 )
 {
   ap_flow_t flow;
@@ -59,8 +59,8 @@ Device::search(
 
   struct ap_flow_chunk flowChunk;
   memset(&flowChunk, 0, sizeof(flowChunk));
-  flowChunk.data = &data[0];
-  flowChunk.length = data.size();
+  flowChunk.data = data;
+  flowChunk.length = dataSize;
 
   struct ap_flow_data flowData;
   memset(&flowData, 0, sizeof(flowData));
@@ -74,13 +74,15 @@ Device::search(
 
   struct ap_match_result result;
 
+  std::vector<std::pair<ElementRef, size_t> > allResults;
   while (APCALL_CHECK(AP_GetMatches)(m_device, &result, 1) > 0) {
-    std::string elementId = elementMap.getElementId(result.report_alias.elementRef);
-    size_t offset = result.byte_offset;
-    std::cout << elementId << " matched at offset " << offset << std::endl;
+    size_t byteOffset = result.byte_offset;
+    ap_anml_element_ref_t elementRef = result.report_alias.elementRef;
+    allResults.push_back(std::make_pair(ElementRef(elementRef), byteOffset));
   }
 
   APCALL_CHECK(AP_CloseFlow)(m_device, flow);
+  return allResults;
 }
 
 /**

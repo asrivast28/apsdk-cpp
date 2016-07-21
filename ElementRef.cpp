@@ -41,6 +41,14 @@ ElementRef::operator*(
   return m_elementRef;
 }
 
+bool
+ElementRef::operator==(
+  const ElementRef& that
+) const
+{
+  return (m_elementRef == *that);
+}
+
 /**
  * @brief  Default destructor.
  */
@@ -48,6 +56,14 @@ ElementRef::~ElementRef(
 )
 {
   m_elementRef = 0;
+}
+
+size_t
+ElementRefHasher::operator()(
+  const ElementRef& elementRef
+) const
+{
+  return std::hash<ap_anml_element_ref_t>()(*elementRef);
 }
 
 }

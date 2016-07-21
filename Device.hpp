@@ -23,8 +23,8 @@ public:
   void
   load(Automaton&&, const unsigned = 0);
 
-  void
-  search(std::vector<unsigned char>&, const ElementMap&);
+  std::vector<std::pair<ElementRef, size_t> >
+  search(void* const, const unsigned);
 
   void
   unload();
