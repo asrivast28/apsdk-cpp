@@ -6,6 +6,36 @@
 namespace ap {
 
 /**
+ * @brief  Converts the first B bytes of the number to hex.
+ *
+ * @tparam B  Number of bytes to be converted. 
+ * @param n   Number to be converted to hex.
+ *
+ * @return  Array of B hex symbols, one for each byte.
+ */
+template <unsigned B>
+std::array<SymbolChange::HexSymbolType, B>
+SymbolChange::getHexSymbols(
+  unsigned n
+)
+{
+  // Reinterpret the given number as stream of unsigned char bytes.
+  unsigned char* x = reinterpret_cast<unsigned char*>(&n);
+  std::array<HexSymbolType, B> symbols;
+  // Assign the hex symbol for each byte.
+  for (HexSymbolType& symbol : symbols) { 
+    char hex[3];
+    sprintf(hex, "%02x", *x);
+    symbol[0] = hex[0];
+    symbol[1] = hex[1];
+    ++x;
+  }
+  return symbols;
+}
+
+template std::array<SymbolChange::HexSymbolType, 4> SymbolChange::getHexSymbols<4>(unsigned);
+
+/**
  * @brief  Initialized the object using maximum number of allowed changes.
  *
  * @param maxChanges  Maximum number of allowed changes. 
@@ -30,7 +60,7 @@ void
 SymbolChange::add(
   const ElementRef& elementRef,
   const AnmlMacro::ParamRef& paramRef,
-  const HexType& hexValue,
+  const HexSymbolType& hexValue,
   const bool negation
 )
 {

@@ -16,13 +16,19 @@ namespace ap {
  */
 class SymbolChange {
 public:
-  typedef std::array<char, 2> HexType;
+  typedef std::array<char, 2> HexSymbolType;
+
+public:
+  template <unsigned N = 4>
+  static
+  std::array<SymbolChange::HexSymbolType, N>
+  getHexSymbols(unsigned);
 
 public:
   SymbolChange(unsigned);
 
   void
-  add(const ElementRef&, const AnmlMacro::ParamRef&, const HexType&, const bool = false);
+  add(const ElementRef&, const AnmlMacro::ParamRef&, const HexSymbolType&, const bool = false);
 
   struct ap_symbol_change*
   operator*();
