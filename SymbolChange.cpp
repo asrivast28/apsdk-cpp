@@ -37,6 +37,46 @@ template std::array<SymbolChange::HexSymbolType, 4> SymbolChange::getHexSymbols<
 template std::array<SymbolChange::HexSymbolType, 3> SymbolChange::getHexSymbols<3>(unsigned);
 
 /**
+ * @brief  Returns symbol set for a single hex symbol.
+ *
+ * @param hexSymbol  Hex symbol for which character class is required.
+ * @param negation   Flag specifying if the symbol is to be negated. Defaults to false.
+ *
+ * @return  Character class corresponding to the hex symbol. 
+ */
+std::string
+SymbolChange::getSymbolSet(
+  const HexSymbolType& hexSymbol,
+  const bool negation
+)
+{  
+  return std::string("[" + std::string(negation ? "^" : "") + "\\x" +
+                     std::string(hexSymbol.data(), hexSymbol.size()) + "]");
+}
+
+/**
+ * @brief  Returns symbol set for multiple hex symbols.
+ *
+ * @param hexSymbols  Vector of hex symbols for which character class is required.
+ * @param negation    Flag specifying if the symbol is to be negated. Defaults to false.
+ *
+ * @return  Character class corresponding to the hex symbols. 
+ */
+std::string
+SymbolChange::getSymbolSet(
+  const std::vector<HexSymbolType>& hexSymbols,
+  const bool negation
+)
+{  
+  std::string allSymbols;
+  for (const HexSymbolType& s : hexSymbols) {
+    allSymbols.append("\\x" + std::string(s.data(), s.size()));
+  }
+  return "[" + std::string(negation ? "^" : "") + allSymbols + "]";
+
+}
+
+/**
  * @brief  Initialized the object using maximum number of allowed changes.
  *
  * @param maxChanges  Maximum number of allowed changes. 
@@ -54,29 +94,25 @@ SymbolChange::SymbolChange(
  *
  * @param elementRef  Reference of the element in which substitution is to be done.
  * @param paramRef    Reference of the parameter which is to be substituted.
- * @param hexValue    Symbol with which the substitution is to be done.
- * @param negation    Flag specifying if the symbol is to be negated. Defaults to false.
+ * @param symbolSet   Symboli set with which the substitution is to be done.
  */
 void
 SymbolChange::add(
   const ElementRef& elementRef,
   const AnmlMacro::ParamRef& paramRef,
-  const HexSymbolType& hexValue,
-  const bool negation
+  const std::string& symbolSet
 )
 {
   // There should be space for another addition.
   assert(m_index < m_symbols.size());
 
   // Add symbol for availability of char*.
-  std::string hexSymbol("[" + std::string(negation ? "^" : "") + "\\x" +
-                        std::string(hexValue.begin(), hexValue.end()) + "]");
-  strcpy(m_symbols[m_index].data(), hexSymbol.c_str());
+  m_symbols[m_index] = symbolSet;
 
   // Add symbol change.
   struct ap_symbol_change& change = m_changes[m_index];
   change.element_ref = *elementRef;
-  change.symbol_set = m_symbols[m_index].data();
+  change.symbol_set = m_symbols[m_index].c_str();
   change.param_ref = *paramRef;
 
   // Increase the count of added changes.

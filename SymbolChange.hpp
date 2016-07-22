@@ -24,11 +24,19 @@ public:
   std::array<SymbolChange::HexSymbolType, N>
   getHexSymbols(unsigned);
 
+  static
+  std::string
+  getSymbolSet(const HexSymbolType&, const bool = false);
+
+  static
+  std::string
+  getSymbolSet(const std::vector<HexSymbolType>&, const bool = false);
+
 public:
   SymbolChange(unsigned);
 
   void
-  add(const ElementRef&, const AnmlMacro::ParamRef&, const HexSymbolType&, const bool = false);
+  add(const ElementRef&, const AnmlMacro::ParamRef&, const std::string&);
 
   struct ap_symbol_change*
   operator*();
@@ -42,7 +50,7 @@ private:
   // Vector containing all the changes associated with this object.
   std::vector<struct ap_symbol_change> m_changes;
   // Vector containing all the symbols for the changes associated with this object.
-  std::vector<std::array<char, 8> > m_symbols;
+  std::vector<std::string> m_symbols;
   // Current count of the changes stored in this object. 
   unsigned m_index;
 }; // class SymbolChange
