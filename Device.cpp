@@ -18,7 +18,7 @@ namespace ap {
  */
 Device::Device(
   const std::string& deviceName,
-  const int svReserve 
+  const int svReserve
 ) : m_device(0),
     m_runtimeObject(0)
 {
@@ -44,13 +44,13 @@ Device::load(
 }
 
 /**
- * @brief  Searches the automaton using the given data. 
+ * @brief  Searches the automaton using the given data.
  *
  * @param data  The data to be streamed to the device.
  */
 std::vector<std::pair<ElementRef, size_t> >
 Device::search(
-  void* const data, 
+  void* const data,
   const unsigned dataSize
 )
 {

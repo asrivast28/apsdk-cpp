@@ -24,7 +24,7 @@ public:
   void
   setMacroDefToBeCompiled() const;
 
-  ParamRef 
+  ParamRef
   getParamFromName(const std::string&) const;
 
   struct ap_anml_element

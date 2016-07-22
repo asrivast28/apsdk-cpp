@@ -7,7 +7,7 @@
 namespace ap {
 
 /**
- * @brief  Default constructor. 
+ * @brief  Default constructor.
  */
 AnmlMacro::AnmlMacro(
 ) : m_macro(0)
@@ -38,7 +38,7 @@ AnmlMacro::AnmlMacro(
  *
  * @param name  Name of the parameter in the macro.
  *
- * @return  AnmlMacro::ParamRef object containing the reference. 
+ * @return  AnmlMacro::ParamRef object containing the reference.
  */
 AnmlMacro::ParamRef
 AnmlMacro::getParamFromName(
@@ -61,7 +61,7 @@ AnmlMacro::setMacroDefToBeCompiled(
 }
 
 /**
- * @brief  Gets ap_anml_element instance for the given macro. 
+ * @brief  Gets ap_anml_element instance for the given macro.
  */
 struct ap_anml_element
 AnmlMacro::getAnmlElement(
@@ -104,10 +104,10 @@ AnmlMacro::ParamRef::ParamRef(
 /**
  * @brief  Copy constructor.
  *
- * @param  Object to be copied from. 
+ * @param  Object to be copied from.
  */
 AnmlMacro::ParamRef::ParamRef(
-  const ParamRef& that 
+  const ParamRef& that
 ) : m_paramRef(that.m_paramRef)
 {
 }

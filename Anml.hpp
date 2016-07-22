@@ -13,7 +13,7 @@
 namespace ap {
 
 /**
- * @brief  Wrapper class for ap_anml_t functionality. 
+ * @brief  Wrapper class for ap_anml_t functionality.
  */
 class Anml {
 public:

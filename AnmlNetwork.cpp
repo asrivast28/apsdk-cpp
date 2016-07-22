@@ -16,7 +16,7 @@ AnmlNetwork::AnmlNetwork(
 }
 
 /**
- * @brief  Copy constructor. 
+ * @brief  Copy constructor.
  */
 AnmlNetwork::AnmlNetwork(
   const AnmlNetwork& that

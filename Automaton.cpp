@@ -19,7 +19,7 @@ namespace ap {
  * @brief  Default constructor.
  */
 Automaton::Automaton(
-) : m_automaton(0) 
+) : m_automaton(0)
 {
 }
 
@@ -34,7 +34,7 @@ Automaton::Automaton(
 }
 
 /**
- * @brief  Constructor for creating the object by reading automaton 
+ * @brief  Constructor for creating the object by reading automaton
  *         from the given file.
  *
  * @param fileName  Name of the file from which automaton is to be read.
@@ -65,7 +65,7 @@ Automaton::Automaton(
 }
 
 /**
- * @brief  Move constructor. 
+ * @brief  Move constructor.
  */
 Automaton::Automaton(
   Automaton&& that
@@ -75,14 +75,14 @@ Automaton::Automaton(
 }
 
 /**
- * @brief  Substitutes symbols in the automaton. 
+ * @brief  Substitutes symbols in the automaton.
  *
  * @param elementMap  Element map for the substitution.
  * @param changes     Array of all the changes.
  */
 void
 Automaton::setSymbol(
-  ElementMap& elementMap, 
+  ElementMap& elementMap,
   SymbolChange& changes
 )
 {
@@ -121,7 +121,7 @@ Automaton::printInfo(
 ) const
 {
   struct ap_automaton_info info;
-  APCALL_CHECK(AP_GetInfo)(m_automaton, &info, 0); 
+  APCALL_CHECK(AP_GetInfo)(m_automaton, &info, 0);
   std::cout << "blocks_rect = " << info.blocks_rect<< std::endl;
   std::cout << "blocks_used = " << info.blocks_used<< std::endl;
   std::cout << "ste_count = " << info.ste_count<< std::endl;

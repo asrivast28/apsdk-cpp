@@ -10,7 +10,7 @@
 namespace ap {
 
 /**
- * @brief  Wrapper class for ap_anml_network_t functionality. 
+ * @brief  Wrapper class for ap_anml_network_t functionality.
  */
 class AnmlNetwork {
 public:

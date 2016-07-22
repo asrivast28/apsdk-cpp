@@ -57,7 +57,7 @@ ElementMap::ElementMap(
 }
 
 /**
- * @brief  Move constructor. 
+ * @brief  Move constructor.
  */
 ElementMap::ElementMap(
   ElementMap&& that
@@ -71,7 +71,7 @@ ElementMap::ElementMap(
  *
  * @param elementId  Id of the element whose element ref is to be found.
  *
- * @return  ElementRef corresponding to the reference. 
+ * @return  ElementRef corresponding to the reference.
  */
 ElementRef
 ElementMap::getElementRef(

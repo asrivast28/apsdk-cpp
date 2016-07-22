@@ -21,10 +21,10 @@ ElementRef::ElementRef(
 }
 
 /**
- * @brief  Copy constructor. 
+ * @brief  Copy constructor.
  */
 ElementRef::ElementRef(
-  const ElementRef& that 
+  const ElementRef& that
 ) : m_elementRef(that.m_elementRef)
 {
 }

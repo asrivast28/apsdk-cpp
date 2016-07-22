@@ -8,7 +8,7 @@
 namespace ap {
 
 /**
- * @brief  Wrapper class for ap_element_ref_t functionality. 
+ * @brief  Wrapper class for ap_element_ref_t functionality.
  */
 class ElementRef {
 public:

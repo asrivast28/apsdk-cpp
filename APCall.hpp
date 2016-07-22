@@ -15,7 +15,7 @@ public:
   { }
 
   template <typename... Args>
-  unsigned 
+  unsigned
   operator()(Args&&... args)
   {
     int error = m_func(std::forward<Args>(args)...);

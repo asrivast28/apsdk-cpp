@@ -11,7 +11,7 @@
 namespace ap {
 
 /**
- * @brief  Wrapper class for ap_automaton_t functionality. 
+ * @brief  Wrapper class for ap_automaton_t functionality.
  */
 class Automaton {
 public:

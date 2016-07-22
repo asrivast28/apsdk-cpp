@@ -51,7 +51,7 @@ private:
   std::vector<struct ap_symbol_change> m_changes;
   // Vector containing all the symbols for the changes associated with this object.
   std::vector<std::string> m_symbols;
-  // Current count of the changes stored in this object. 
+  // Current count of the changes stored in this object.
   unsigned m_index;
 }; // class SymbolChange
 

@@ -31,7 +31,7 @@ Anml::Anml(
  *
  * @param fileName  Name of the ANML file from which macro is to be loaded.
  *
- * @return  Returns AnmlMacro instance for the loaded macro. 
+ * @return  Returns AnmlMacro instance for the loaded macro.
  */
 AnmlMacro
 Anml::loadMacro(
@@ -42,7 +42,7 @@ Anml::loadMacro(
   int lineNumber = 0;
   try {
     APCALL_CHECK(AP_LoadAnmlMacro)(m_anml, &macro, &lineNumber, fileName.c_str(), static_cast<ap_cbinfo_t*>(0), AP_OPT_DEFAULT, static_cast<const char*>(0));
-  } 
+  }
   catch(std::runtime_error& e) {
     throw std::runtime_error(std::string(e.what()) + " In " + fileName + " on line " + std::to_string(lineNumber) + ".");
   }
@@ -56,7 +56,7 @@ Anml::loadMacro(
  *
  * @param anmlId  ANML id of the network to be created.
  *
- * @return  Returns AnmlNetwork instance for the created network. 
+ * @return  Returns AnmlNetwork instance for the created network.
  */
 AnmlNetwork
 Anml::createNetwork(
@@ -81,7 +81,7 @@ Anml::compileMacros(
 /**
  * @brief  Compiles the ANML workspace.
  *
- * @return  Returns Automaton and ElementMap instances generated as a result of the compilation. 
+ * @return  Returns Automaton and ElementMap instances generated as a result of the compilation.
  */
 std::pair<Automaton, ElementMap>
 Anml::compileAnml(

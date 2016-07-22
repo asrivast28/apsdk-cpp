@@ -8,7 +8,7 @@ namespace ap {
 /**
  * @brief  Converts the first B bytes of the number to hex.
  *
- * @tparam B  Number of bytes to be converted. 
+ * @tparam B  Number of bytes to be converted.
  * @param n   Number to be converted to hex.
  *
  * @return  Array of B hex symbols, one for each byte.
@@ -24,7 +24,7 @@ SymbolChange::getHexSymbols(
   x += (B - 1);
   std::array<HexSymbolType, B> symbols;
   // Assign the hex symbol for each byte.
-  for (HexSymbolType& symbol : symbols) { 
+  for (HexSymbolType& symbol : symbols) {
     char hex[3];
     sprintf(hex, "%02x", *x);
     symbol[0] = hex[0];
@@ -44,14 +44,14 @@ template std::array<SymbolChange::HexSymbolType, 4> SymbolChange::getHexSymbols<
  * @param hexSymbol  Hex symbol for which character class is required.
  * @param negation   Flag specifying if the symbol is to be negated. Defaults to false.
  *
- * @return  Character class corresponding to the hex symbol. 
+ * @return  Character class corresponding to the hex symbol.
  */
 std::string
 SymbolChange::getSymbolSet(
   const HexSymbolType& hexSymbol,
   const bool negation
 )
-{  
+{
   return std::string("[" + std::string(negation ? "^" : "") + "\\x" +
                      std::string(hexSymbol.data(), hexSymbol.size()) + "]");
 }
@@ -62,14 +62,14 @@ SymbolChange::getSymbolSet(
  * @param hexSymbols  Vector of hex symbols for which character class is required.
  * @param negation    Flag specifying if the symbol is to be negated. Defaults to false.
  *
- * @return  Character class corresponding to the hex symbols. 
+ * @return  Character class corresponding to the hex symbols.
  */
 std::string
 SymbolChange::getSymbolSet(
   const std::vector<HexSymbolType>& hexSymbols,
   const bool negation
 )
-{  
+{
   std::string allSymbols;
   for (const HexSymbolType& s : hexSymbols) {
     allSymbols.append("\\x" + std::string(s.data(), s.size()));
@@ -81,10 +81,10 @@ SymbolChange::getSymbolSet(
 /**
  * @brief  Initialized the object using maximum number of allowed changes.
  *
- * @param maxChanges  Maximum number of allowed changes. 
+ * @param maxChanges  Maximum number of allowed changes.
  */
 SymbolChange::SymbolChange(
-  unsigned maxChanges 
+  unsigned maxChanges
 ) : m_changes(maxChanges),
     m_symbols(maxChanges),
     m_index(0)
