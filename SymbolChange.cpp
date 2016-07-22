@@ -34,8 +34,9 @@ SymbolChange::getHexSymbols(
   return symbols;
 }
 
-template std::array<SymbolChange::HexSymbolType, 4> SymbolChange::getHexSymbols<4>(unsigned);
+template std::array<SymbolChange::HexSymbolType, 2> SymbolChange::getHexSymbols<2>(unsigned);
 template std::array<SymbolChange::HexSymbolType, 3> SymbolChange::getHexSymbols<3>(unsigned);
+template std::array<SymbolChange::HexSymbolType, 4> SymbolChange::getHexSymbols<4>(unsigned);
 
 /**
  * @brief  Returns symbol set for a single hex symbol.
