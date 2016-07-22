@@ -21,6 +21,7 @@ SymbolChange::getHexSymbols(
 {
   // Reinterpret the given number as stream of unsigned char bytes.
   unsigned char* x = reinterpret_cast<unsigned char*>(&n);
+  x += (B - 1);
   std::array<HexSymbolType, B> symbols;
   // Assign the hex symbol for each byte.
   for (HexSymbolType& symbol : symbols) { 
@@ -28,7 +29,7 @@ SymbolChange::getHexSymbols(
     sprintf(hex, "%02x", *x);
     symbol[0] = hex[0];
     symbol[1] = hex[1];
-    ++x;
+    --x;
   }
   return symbols;
 }
