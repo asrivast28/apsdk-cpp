@@ -34,6 +34,7 @@ SymbolChange::getHexSymbols(
 }
 
 template std::array<SymbolChange::HexSymbolType, 4> SymbolChange::getHexSymbols<4>(unsigned);
+template std::array<SymbolChange::HexSymbolType, 3> SymbolChange::getHexSymbols<3>(unsigned);
 
 /**
  * @brief  Initialized the object using maximum number of allowed changes.
