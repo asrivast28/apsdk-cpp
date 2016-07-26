@@ -21,8 +21,6 @@ srcFiles = [
             'Anml.cpp',
             ]
 
-allDefs = env.get('CPPDEFINES', [])
-
-apsdk = env.StaticLibrary(target = libName, source = srcFiles, CPPDEFINES = allDefs + ['APSDKVERSION=%d'%env.sdkVersion], LIBS = cppLibs)
+apsdk = env.StaticLibrary(target = libName, source = srcFiles, LIBS = cppLibs)
 #apsdk = env.SharedLibrary(target = libName, source = srcFiles, LIBS = cppLibs)
 Return("apsdk")
