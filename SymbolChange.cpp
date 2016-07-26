@@ -3,9 +3,6 @@
 #include <cassert>
 #include <cstring>
 
-#if (APSDKVERSION != 17)
-#include <micron/ap/ap_reload.h>
-#endif
 
 namespace ap {
 

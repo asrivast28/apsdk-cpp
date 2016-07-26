@@ -7,7 +7,9 @@
 #include <array>
 #include <vector>
 
-struct ap_symbol_change;
+#if (APSDKVERSION != 17)
+#include <micron/ap/ap_reload.h>
+#endif
 
 namespace ap {
 
