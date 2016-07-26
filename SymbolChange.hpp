@@ -7,7 +7,7 @@
 #include <array>
 #include <vector>
 
-#include <micron/ap/ap_reload.h>
+struct ap_symbol_change;
 
 namespace ap {
 

@@ -5,7 +5,9 @@
 #include <iostream>
 
 #include <micron/ap/ap_load.h>
+#if (APSDKVERSION != 17)
 #include <micron/ap/ap_reload.h>
+#endif
 #include <micron/ap/sys/platform.h>
 #if defined(LINUX32) || defined(LINUX64)
 #include <fcntl.h>
