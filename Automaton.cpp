@@ -4,7 +4,6 @@
 
 #include <iostream>
 
-#include <micron/ap/ap_load.h>
 #include <micron/ap/sys/platform.h>
 #if defined(LINUX32) || defined(LINUX64)
 #include <fcntl.h>

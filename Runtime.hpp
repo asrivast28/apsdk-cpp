@@ -16,12 +16,16 @@ unsigned
 queryDeviceCount();
 
 std::vector<struct ap_device_metrics>
-queryDeviceMetrics();
+queryDeviceMetrics(const std::string& = "");
 
 void
 configureDevice(const std::string&);
 
+#if (APSDKVERSION != 17)
 unsigned
+#else
+struct ap_device_config
+#endif
 queryDeviceConfig(const std::string&);
 
 } // namespace runtime

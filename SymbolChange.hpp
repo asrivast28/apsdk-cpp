@@ -7,6 +7,7 @@
 #include <array>
 #include <vector>
 
+#include <micron/ap/ap_load.h>
 #if (APSDKVERSION != 17)
 #include <micron/ap/ap_reload.h>
 #endif
