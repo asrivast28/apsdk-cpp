@@ -94,9 +94,9 @@ queryDeviceConfig(
   unsigned loadRegions = APCALL_CHECK(AP_QueryDeviceConfig)(deviceName.c_str());
   return loadRegions;
 #else
-  struct ap_device_config
+  struct ap_device_config;
   APCALL_CHECK(AP_QueryDeviceConfig)(deviceName.c_str(), &config);
-  return config
+  return config;
 #endif
 }
 
