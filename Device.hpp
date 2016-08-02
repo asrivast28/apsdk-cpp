@@ -3,6 +3,7 @@
 
 #include "Automaton.hpp"
 
+#include <limits>
 #include <string>
 
 #include <micron/ap/ap_anml.h>
@@ -24,7 +25,7 @@ public:
   load(Automaton&&, const unsigned = 0);
 
   std::vector<std::pair<ElementRef, size_t> >
-  search(std::vector<unsigned char>&);
+  search(std::vector<unsigned char>&, const size_t = std::numeric_limits<size_t>::max());
 
   void
   unload();
