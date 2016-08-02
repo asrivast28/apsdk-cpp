@@ -50,8 +50,7 @@ Device::load(
  */
 std::vector<std::pair<ElementRef, size_t> >
 Device::search(
-  void* const data,
-  const unsigned dataSize
+  std::vector<unsigned char>& data
 )
 {
   ap_flow_t flow;
@@ -59,8 +58,8 @@ Device::search(
 
   struct ap_flow_chunk flowChunk;
   memset(&flowChunk, 0, sizeof(flowChunk));
-  flowChunk.data = data;
-  flowChunk.length = dataSize;
+  flowChunk.data = &data[0];
+  flowChunk.length = data.size();
 
   struct ap_flow_data flowData;
   memset(&flowData, 0, sizeof(flowData));

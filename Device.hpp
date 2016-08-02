@@ -24,7 +24,7 @@ public:
   load(Automaton&&, const unsigned = 0);
 
   std::vector<std::pair<ElementRef, size_t> >
-  search(void* const, const unsigned);
+  search(std::vector<unsigned char>&);
 
   void
   unload();
