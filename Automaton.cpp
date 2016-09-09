@@ -1,3 +1,10 @@
+/**
+ * @file Automaton.cpp
+ * @brief Implementation of Automaton functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
+ * @version 1.0
+ * @date 2016-09-09
+ */
 #include "Automaton.hpp"
 
 #include "APCall.hpp"

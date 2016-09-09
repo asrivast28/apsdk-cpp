@@ -1,3 +1,10 @@
+/**
+ * @file ElementMap.cpp
+ * @brief Implementation of ElementMap functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
+ * @version 1.0
+ * @date 2016-09-09
+ */
 #include "ElementMap.hpp"
 
 #include "APCall.hpp"

@@ -1,3 +1,10 @@
+/**
+ * @file ElementMap.hpp
+ * @brief Declaration of ElementMap functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
+ * @version 1.0
+ * @date 2016-09-09
+ */
 #ifndef APSDK_ELEMENTMAP_HPP_
 #define APSDK_ELEMENTMAP_HPP_
 

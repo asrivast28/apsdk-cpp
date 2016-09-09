@@ -1,3 +1,10 @@
+/**
+ * @file Runtime.hpp
+ * @brief Declaration of different runtime functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
+ * @version 1.0
+ * @date 2016-09-09
+ */
 #ifndef APSDK_RUNTIME_HPP_
 #define APSDK_RUNTIME_HPP_
 
