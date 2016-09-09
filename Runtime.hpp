@@ -21,10 +21,10 @@ queryDeviceMetrics(const std::string& = "");
 void
 configureDevice(const std::string&);
 
-#if (APSDKVERSION != 17)
-unsigned
-#else
+#if (APSDKVERSION == 17)
 struct ap_device_config
+#else
+unsigned
 #endif
 queryDeviceConfig(const std::string&);
 
