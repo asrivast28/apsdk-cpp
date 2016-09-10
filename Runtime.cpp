@@ -60,7 +60,7 @@ queryDeviceMetrics(
 )
 {
   std::vector<struct ap_device_metrics> deviceMetrics(queryDeviceCount());
-#if (APSDKVERSION == 17)
+#if (APSDKVERSION != 16)
   APCALL_CHECK(AP_QueryDeviceMetrics)(&deviceMetrics[0], deviceName.c_str());
 #else
   APCALL_CHECK(AP_QueryDeviceMetrics)(&deviceMetrics[0]);
@@ -84,27 +84,22 @@ configureDevice(
 /**
  * @brief  Returns the number of load regions for the given device. 
  *
- * @param deviceName  Name of the device to be queried.
+ * @param deviceName  Name of the physical device to be queried.
  *
  * @return  Number of load regions.
  */
-#if (APSDKVERSION == 17)
-struct ap_device_config
-#else
 unsigned
-#endif
 queryDeviceConfig(
   const std::string& deviceName
 )
 {
-#if (APSDKVERSION == 17)
-  struct ap_device_config config;
-  APCALL_CHECK(AP_QueryDeviceConfig)(deviceName.c_str(), &config);
-  return config;
+  unsigned loadRegions;
+#if (APSDKVERSION != 16)
+  loadRegions = APCALL_CHECK(AP_QueryDeviceConfig)(deviceName.c_str(), static_cast<struct ap_device_config*>(0));
 #else
-  unsigned loadRegions = APCALL_CHECK(AP_QueryDeviceConfig)(deviceName.c_str());
-  return loadRegions;
+  loadRegions = APCALL_CHECK(AP_QueryDeviceConfig)(deviceName.c_str());
 #endif
+  return loadRegions;
 }
 
 } // namespace runtime
