@@ -29,6 +29,10 @@ public:
   typedef std::array<char, 2> HexSymbolType;
 
 public:
+  static
+  SymbolChange::HexSymbolType
+  getHexSymbol(unsigned char);
+
   template <unsigned N = 4>
   static
   std::array<SymbolChange::HexSymbolType, N>
@@ -40,7 +44,15 @@ public:
 
   static
   std::string
+  getSymbolSet(const std::pair<HexSymbolType, HexSymbolType>&, const bool = false);
+
+  static
+  std::string
   getSymbolSet(const std::vector<HexSymbolType>&, const bool = false);
+
+  static
+  std::string
+  getSymbolSet(const std::vector<std::pair<HexSymbolType, HexSymbolType> >&, const bool = false);
 
 public:
   SymbolChange(unsigned);

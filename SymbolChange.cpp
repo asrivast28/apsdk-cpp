@@ -14,6 +14,27 @@
 namespace ap {
 
 /**
+ * @brief  Converts the given byte to hex.
+ *
+ * @param x  Byte to be converted to hex.
+ *
+ * @return  Hex symbol for the byte.
+ */
+SymbolChange::HexSymbolType
+SymbolChange::getHexSymbol(
+  unsigned char x
+)
+{
+  char hex[3];
+  sprintf(hex, "%02x", x);
+
+  HexSymbolType symbol;
+  symbol[0] = hex[0];
+  symbol[1] = hex[1];
+  return symbol;
+}
+
+/**
  * @brief  Converts the first B bytes of the number to hex.
  *
  * @tparam B  Number of bytes to be converted.
@@ -33,10 +54,7 @@ SymbolChange::getHexSymbols(
   std::array<HexSymbolType, B> symbols;
   // Assign the hex symbol for each byte.
   for (HexSymbolType& symbol : symbols) {
-    char hex[3];
-    sprintf(hex, "%02x", *x);
-    symbol[0] = hex[0];
-    symbol[1] = hex[1];
+    symbol = getHexSymbol(*x);
     --x;
   }
   return symbols;
@@ -65,6 +83,25 @@ SymbolChange::getSymbolSet(
 }
 
 /**
+ * @brief  Returns symbol set for hex symbols in a given range.
+ *
+ * @param hexSymbols  Hex symbols representing lower and upper limit of the character class.
+ * @param negation    Flag specifying if the symbol is to be negated. Defaults to false.
+ *
+ * @return  Character class corresponding to the range.
+ */
+std::string
+SymbolChange::getSymbolSet(
+  const std::pair<HexSymbolType, HexSymbolType>& hexSymbols,
+  const bool negation
+)
+{
+  return std::string("[" + std::string(negation ? "^" : "") +
+                     "\\x" + std::string(hexSymbols.first.data(), hexSymbols.first.size()) + "-" +
+                     "\\x" + std::string(hexSymbols.second.data(), hexSymbols.second.size()) + "]");
+}
+
+/**
  * @brief  Returns symbol set for multiple hex symbols.
  *
  * @param hexSymbols  Vector of hex symbols for which character class is required.
@@ -81,6 +118,29 @@ SymbolChange::getSymbolSet(
   std::string allSymbols;
   for (const HexSymbolType& s : hexSymbols) {
     allSymbols.append("\\x" + std::string(s.data(), s.size()));
+  }
+  return "[" + std::string(negation ? "^" : "") + allSymbols + "]";
+
+}
+
+/**
+ * @brief  Returns symbol set for multiple hex symbol ranges.
+ *
+ * @param hexSymbols  Vector of hex symbol ranges for which character class is required.
+ * @param negation    Flag specifying if the symbol is to be negated. Defaults to false.
+ *
+ * @return  Character class corresponding to the hex symbol ranges.
+ */
+std::string
+SymbolChange::getSymbolSet(
+  const std::vector<std::pair<HexSymbolType, HexSymbolType> >& hexSymbols,
+  const bool negation
+)
+{
+  std::string allSymbols;
+  for (const std::pair<HexSymbolType, HexSymbolType>& i : hexSymbols) {
+    allSymbols.append("\\x" + std::string(i.first.data(), i.first.size()) + "-" +
+                      "\\x" + std::string(i.second.data(), i.second.size()));
   }
   return "[" + std::string(negation ? "^" : "") + allSymbols + "]";
 
