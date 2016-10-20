@@ -1,9 +1,6 @@
 /**
  * @file Device.hpp
  * @brief Declaration of Device functions.
- * @author Ankit Srivastava <asrivast@gatech.edu>
- * @version 1.0
- * @date 2016-09-09
  */
 #ifndef APSDK_DEVICE_HPP_
 #define APSDK_DEVICE_HPP_

@@ -1,9 +1,6 @@
 /**
  * @file ElementRef.hpp
  * @brief Declaration of ElementRef functions.
- * @author Ankit Srivastava <asrivast@gatech.edu>
- * @version 1.0
- * @date 2016-09-09
  */
 #ifndef APSDK_ELEMENTREF_HPP_
 #define APSDK_ELEMENTREF_HPP_

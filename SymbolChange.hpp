@@ -1,9 +1,6 @@
 /**
  * @file SymbolChange.hpp
  * @brief Declaration of SymbolChange functions.
- * @author Ankit Srivastava <asrivast@gatech.edu>
- * @version 1.0
- * @date 2016-09-09
  */
 #ifndef APSDK_SYMBOLCHANGE_HPP_
 #define APSDK_SYMBOLCHANGE_HPP_

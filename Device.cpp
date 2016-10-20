@@ -1,9 +1,6 @@
 /**
  * @file Device.cpp
  * @brief Implementation of Device functions.
- * @author Ankit Srivastava <asrivast@gatech.edu>
- * @version 1.0
- * @date 2016-09-09
  */
 #include "Device.hpp"
 

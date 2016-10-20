@@ -1,9 +1,6 @@
 /**
  * @file AnmlMacro.cpp
  * @brief Implementation of AnmlMacro functions.
- * @author Ankit Srivastava <asrivast@gatech.edu>
- * @version 1.0
- * @date 2016-09-09
  */
 #include "AnmlMacro.hpp"
 

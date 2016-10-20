@@ -1,9 +1,6 @@
 /**
  * @file APCall.hpp
  * @brief Functionality for error checking calls to C API.
- * @author Ankit Srivastava <asrivast@gatech.edu>
- * @version 1.0
- * @date 2016-09-09
  */
 #ifndef APSDK_APCALL_HPP_
 #define APSDK_APCALL_HPP_

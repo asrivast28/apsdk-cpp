@@ -1,9 +1,6 @@
 /**
  * @file ElementRef.cpp
  * @brief Implementation of ElementRef functions.
- * @author Ankit Srivastava <asrivast@gatech.edu>
- * @version 1.0
- * @date 2016-09-09
  */
 #include "ElementRef.hpp"
 

@@ -1,9 +1,6 @@
 /**
  * @file Anml.hpp
  * @brief Declaration of Anml functions.
- * @author Ankit Srivastava <asrivast@gatech.edu>
- * @version 1.0
- * @date 2016-09-09
  */
 #ifndef APSDK_ANML_HPP_
 #define APSDK_ANML_HPP_
