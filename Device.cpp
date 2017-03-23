@@ -13,6 +13,16 @@
 
 namespace ap {
 
+
+/**
+ * @brief  Default constructor.
+ */
+Device::Device(
+) : m_device(0),
+    m_runtimeObject(0)
+{
+}
+
 /**
  * @brief  Constructor for creating the object for a given device name.
  *
@@ -28,6 +38,20 @@ Device::Device(
 {
   // Reserve all the state vectors.
   APCALL_CHECK(AP_OpenDevice)(&m_device, deviceName.c_str(), svReserve);
+}
+
+Device&
+Device::operator=(
+  Device&& that
+)
+{
+  m_device = that.m_device;
+  m_runtimeObject = that.m_runtimeObject;
+
+  that.m_device = 0;
+  that.m_runtimeObject = 0;
+
+  return *this;
 }
 
 /**
@@ -117,6 +141,7 @@ Device::unload(
 Device::~Device(
 )
 {
+  unload();
   if (m_device != 0) {
     APCALL_CHECK(AP_CloseDevice)(m_device);
     m_device = 0;

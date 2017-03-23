@@ -32,6 +32,9 @@ public:
 
   ElementMap(ElementMap&&);
 
+  ElementMap&
+  operator=(ElementMap&&);
+
   ElementRef
   getElementRef(const std::string&) const;
 

@@ -70,6 +70,16 @@ ElementMap::ElementMap(
   that.m_elementMap = 0;
 }
 
+ElementMap&
+ElementMap::operator=(
+  ElementMap&& that
+)
+{
+  m_elementMap = that.m_elementMap;
+  that.m_elementMap = 0;
+  return *this;
+}
+
 /**
  * @brief  Gets element reference corresponding to the given element id.
  *

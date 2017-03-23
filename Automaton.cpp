@@ -76,6 +76,16 @@ Automaton::Automaton(
   that.m_automaton = 0;
 }
 
+Automaton&
+Automaton::operator=(
+  Automaton&& that
+)
+{
+  m_automaton = that.m_automaton;
+  that.m_automaton = 0;
+  return *this;
+}
+
 /**
  * @brief  Substitutes symbols in the automaton.
  *

@@ -19,11 +19,16 @@ namespace ap {
  */
 class Device {
 public:
+  Device();
+
   Device(const std::string&, const int = -1);
 
   // Do NOT allow copying of this object.
   // The underlying instance is not "shareable".
   Device(const Device&) = delete;
+
+  Device&
+  operator=(Device&&);
 
   void
   load(Automaton&&, const unsigned = 0);

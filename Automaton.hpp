@@ -34,6 +34,9 @@ public:
 
   Automaton(Automaton&&);
 
+  Automaton&
+  operator=(Automaton&&);
+
   void
   setSymbol(ElementMap&, SymbolChange&);
 
