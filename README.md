@@ -1,6 +1,6 @@
 # C++ API for AP-SDK
 This repository provides a C++ API for AP-SDK, by wrapping around [the C API](http://www.micronautomata.com/apsdk_documentation/1.7-34/modules.html) provided by the SDK.
-We create a class each for encapsulating every datatype used by the C API. In each case, the class also provides all the related functionality and some helper functions.
+A class was created for encapsulating every datatype used by the C API. In each case, the class also provides all the related functionality and some helper functions.
 
 ## Requirements
 * **gcc** (with C++11 support)  
@@ -15,5 +15,5 @@ SCons, a cross-platform Python based build environment, is required for building
  More information about the tool can be found at [http://scons.org/](http://scons.org/).
 
 ## Building
-This repository is not intended to be used in a stand-alone mode. Therefore, we only provide an `SConscript` file for the repository, which can be
+This repository is not intended to be used in a stand-alone mode. Therefore, only an `SConscript` file is provided for the repository, which can be
 called by the `SConstruct` of another project.
