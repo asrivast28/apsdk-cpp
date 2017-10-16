@@ -94,7 +94,7 @@ Device::search(
     struct ap_flow_chunk flowChunk;
     memset(&flowChunk, 0, sizeof(flowChunk));
     flowChunk.data = &data[index];
-    flowChunk.length = (dataSize > maxChunkSize) ? maxChunkSize : dataSize;
+    flowChunk.length = ((dataSize - index) > maxChunkSize) ? maxChunkSize : (dataSize - index);
 
     // Index for the next iteration.
     index += flowChunk.length;
