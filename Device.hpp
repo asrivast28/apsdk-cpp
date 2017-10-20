@@ -42,6 +42,9 @@ public:
   ~Device();
 
 private:
+  static const size_t MAX_MATCHES = 512;
+
+private:
   // ap_device_t instance that this object refers to.
   ap_device_t m_device;
   // ap_rto_t instance that this object refers to.

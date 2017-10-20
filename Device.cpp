@@ -6,6 +6,7 @@
 
 #include "APCall.hpp"
 
+#include <algorithm>
 #include <cstring>
 
 #include <micron/ap/ap_load.h>
@@ -90,6 +91,8 @@ Device::search(
   APCALL_CHECK(AP_OpenFlow)(m_device, &flow, m_runtimeObject, static_cast<void*>(0));
 
   size_t index = 0;
+  std::vector<struct ap_match_result> matches(MAX_MATCHES);
+  std::vector<std::pair<ElementRef, size_t> > results(MAX_MATCHES);
   do {
     struct ap_flow_chunk flowChunk;
     memset(&flowChunk, 0, sizeof(flowChunk));
@@ -109,13 +112,14 @@ Device::search(
     APCALL_CHECK(AP_ScanFlows)(m_device, &flowData, 1, &complete);
     APCALL_CHECK(AP_Wait)(m_device, &complete, 0);
 
-    struct ap_match_result result;
-
-    while (APCALL_CHECK(AP_GetMatches)(m_device, &result, 1) > 0) {
-      size_t byteOffset = result.byte_offset;
-      ap_anml_element_ref_t elementRef = result.report_alias.elementRef;
-      allResults.push_back(std::make_pair(ElementRef(elementRef), byteOffset));
-    }
+    size_t numMatches;
+    do {
+      numMatches = APCALL_CHECK(AP_GetMatches)(m_device, &matches[0], matches.size());
+      std::transform(matches.begin(), matches.begin() + numMatches, results.begin(),
+                     [](const struct ap_match_result& match) { return std::make_pair(ElementRef(match.report_alias.elementRef), match.byte_offset); }
+                    );
+      allResults.insert(allResults.end(), results.begin(), results.begin() + numMatches);
+    } while (numMatches > 0);
   } while (index < dataSize);
 
   APCALL_CHECK(AP_CloseFlow)(m_device, flow);
