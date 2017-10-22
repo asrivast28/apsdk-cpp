@@ -33,7 +33,7 @@ public:
   void
   load(Automaton&&, const unsigned = 0);
 
-  std::vector<std::pair<ElementRef, size_t> >
+  std::vector<std::pair<size_t, ElementRef> >
   search(std::vector<unsigned char>&, const size_t = std::numeric_limits<size_t>::max());
 
   void

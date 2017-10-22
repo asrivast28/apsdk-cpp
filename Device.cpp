@@ -77,14 +77,16 @@ Device::load(
  *
  * @param data          The data to be streamed to the device.
  * @param maxChunkSize  Maximum size of the chunk to be streamed to the device.
+ *
+ * @returns  Pairs of the byte offset of matches and the corresponding matched automaton refs.
  */
-std::vector<std::pair<ElementRef, size_t> >
+std::vector<std::pair<size_t, ElementRef> >
 Device::search(
   std::vector<unsigned char>& data,
   const size_t maxChunkSize
 )
 {
-  std::vector<std::pair<ElementRef, size_t> > allResults;
+  std::vector<std::pair<size_t, ElementRef> > allResults;
   const size_t dataSize = data.size();
 
   ap_flow_t flow;
@@ -92,7 +94,7 @@ Device::search(
 
   size_t index = 0;
   std::vector<struct ap_match_result> matches(MAX_MATCHES);
-  std::vector<std::pair<ElementRef, size_t> > results(MAX_MATCHES);
+  std::vector<std::pair<size_t, ElementRef> > results(MAX_MATCHES);
   do {
     struct ap_flow_chunk flowChunk;
     memset(&flowChunk, 0, sizeof(flowChunk));
@@ -116,7 +118,7 @@ Device::search(
     do {
       numMatches = APCALL_CHECK(AP_GetMatches)(m_device, &matches[0], matches.size());
       std::transform(matches.begin(), matches.begin() + numMatches, results.begin(),
-                     [](const struct ap_match_result& match) { return std::make_pair(ElementRef(match.report_alias.elementRef), match.byte_offset); }
+                     [](const struct ap_match_result& match) { return std::make_pair(match.byte_offset, ElementRef(match.report_alias.elementRef)); }
                     );
       allResults.insert(allResults.end(), results.begin(), results.begin() + numMatches);
     } while (numMatches > 0);
