@@ -1,4 +1,6 @@
 # C++ API for AP-SDK
+[![Apache 2.0 License](https://img.shields.io/badge/license-Apache%20v2.0-blue.svg)](LICENSE)
+
 This repository provides a C++ API for AP-SDK, by wrapping around [the C API](http://www.micronautomata.com/apsdk_documentation/1.7-34/modules.html) provided by the SDK.
 A class was created for encapsulating every datatype used by the C API. In each case, the class also provides all the related functionality and some helper functions.
 
