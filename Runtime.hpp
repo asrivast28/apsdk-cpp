@@ -1,6 +1,7 @@
 /**
  * @file Runtime.hpp
  * @brief Declaration of different runtime functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *

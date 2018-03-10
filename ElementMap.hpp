@@ -1,6 +1,7 @@
 /**
  * @file ElementMap.hpp
  * @brief Declaration of ElementMap functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *

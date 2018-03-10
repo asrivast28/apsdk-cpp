@@ -1,6 +1,7 @@
 /**
  * @file AnmlMacro.hpp
  * @brief Declaration of AnmlMacro functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *

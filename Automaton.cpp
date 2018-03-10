@@ -1,6 +1,7 @@
 /**
  * @file Automaton.cpp
  * @brief Implementation of Automaton functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *

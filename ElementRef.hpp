@@ -1,6 +1,7 @@
 /**
  * @file ElementRef.hpp
  * @brief Declaration of ElementRef functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *

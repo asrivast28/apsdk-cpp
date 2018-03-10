@@ -1,6 +1,7 @@
 /**
  * @file SymbolChange.cpp
  * @brief Implementation of SymbolChange functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *

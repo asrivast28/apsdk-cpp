@@ -1,6 +1,7 @@
 /**
  * @file ElementMap.cpp
  * @brief Implementation of ElementMap functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *

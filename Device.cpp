@@ -1,6 +1,7 @@
 /**
  * @file Device.cpp
  * @brief Implementation of Device functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *

@@ -1,6 +1,7 @@
 /**
  * @file APCall.hpp
  * @brief Functionality for error checking calls to C API.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *

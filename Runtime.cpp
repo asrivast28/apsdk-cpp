@@ -1,6 +1,7 @@
 /**
  * @file Runtime.cpp
  * @brief Implementation of different runtime functions.
+ * @author Ankit Srivastava <asrivast@gatech.edu>
  *
  * Copyright 2018 Georgia Institute of Technology
  *
