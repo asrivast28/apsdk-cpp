@@ -1,6 +1,7 @@
 ##
 # @file SConscript
 # @brief Provides functionality for building the apsdk static library.
+# @author Ankit Srivastava <asrivast@gatech.edu>
 #
 # Copyright 2018 Georgia Institute of Technology
 #
