@@ -7,11 +7,8 @@ A class was created for encapsulating every datatype used by the C API. In each 
 ## Requirements
 * **gcc** (with C++11 support)  
 This project has been test built only on Linux platform, using gcc with C++11 support.
-* **AP SDK** (*v1.6* or *v1.7*)  
-The SDK can be downloaded from the following links: [Windows](https://drive.google.com/open?id=0B7SP70jwzihbSHRGMFhmUVQ2MG8),
- [Ubuntu](https://drive.google.com/open?id=0B7SP70jwzihbbzJnN3Y0Zmd1N2c),
- and [CentOS](https://drive.google.com/open?id=0B7SP70jwzihbVUlydlR5a0NwbUE).  
-Please note that the provided links to the SDK are for the purpose of evaluation of this work and should not be distributed without the permission of Micron, Inc.
+* **AP SDK** (*v1.7.26* or *v1.7.34*)  
+The SDK provides the C API around which this wrapper works. 
 * **SCons**  
 SCons, a cross-platform Python based build environment, is required for building the project.
  More information about the tool can be found at [http://scons.org/](http://scons.org/).
