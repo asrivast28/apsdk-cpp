@@ -20,6 +20,7 @@
 #include "Device.hpp"
 
 #include "APCall.hpp"
+#include "Timer.hpp"
 
 #include <algorithm>
 #include <cstring>
@@ -110,6 +111,7 @@ Device::search(
   size_t index = 0;
   std::vector<struct ap_match_result> matches(MAX_MATCHES);
   std::vector<std::pair<size_t, ElementRef> > results(MAX_MATCHES);
+  Timer t1, t2;
   do {
     struct ap_flow_chunk flowChunk;
     memset(&flowChunk, 0, sizeof(flowChunk));
@@ -126,18 +128,25 @@ Device::search(
     flowData.chunk_count = 1;
 
     struct ap_completion complete;
+    t1.start();
     APCALL_CHECK(AP_ScanFlows)(m_device, &flowData, 1, &complete);
     APCALL_CHECK(AP_Wait)(m_device, &complete, 0);
+    t1.pause();
 
     size_t numMatches;
     do {
+      t2.start();
       numMatches = APCALL_CHECK(AP_GetMatches)(m_device, &matches[0], matches.size());
+      t2.pause();
       std::transform(matches.begin(), matches.begin() + numMatches, results.begin(),
                      [](const struct ap_match_result& match) { return std::make_pair(match.byte_offset, ElementRef(match.report_alias.elementRef)); }
                     );
       allResults.insert(allResults.end(), results.begin(), results.begin() + numMatches);
     } while (numMatches > 0);
   } while (index < dataSize);
+
+  std::cout << "Time taken in scanning flows: " << t1.elapsed() << std::endl;
+  std::cout << "Time taken in getting matches: " << t2.elapsed() << std::endl;
 
   APCALL_CHECK(AP_CloseFlow)(m_device, flow);
   return allResults;
