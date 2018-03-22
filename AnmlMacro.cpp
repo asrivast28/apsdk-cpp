@@ -65,7 +65,7 @@ AnmlMacro::getParamFromName(
 ) const
 {
   ap_macro_param_ref_t param;
-  APCALL_CHECK(AP_GetMacroParamFromName)(m_macro, &param, name.c_str());
+  APCALL_CHECK_ZERO(AP_GetMacroParamFromName)(m_macro, &param, name.c_str());
   return ParamRef(param);
 }
 
@@ -106,7 +106,7 @@ AnmlMacro::~AnmlMacro(
  * @brief  Default constructor.
  */
 AnmlMacro::ParamRef::ParamRef(
-) : m_paramRef(0)
+) : m_paramRef(-1)
 {
 }
 
