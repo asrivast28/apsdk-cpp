@@ -49,7 +49,7 @@ AnmlNetwork::AnmlNetwork(
  * @param macro   Macro reference to be added to the network.
  * @param anmlId  ANML id of the reference to be added.
  */
-void
+ElementRef
 AnmlNetwork::addMacroRef(
   const AnmlMacro& macro,
   const std::string& anmlId
@@ -60,6 +60,7 @@ AnmlNetwork::addMacroRef(
 
   ap_anml_element_ref_t elementRef;
   APCALL_CHECK(AP_AddAnmlElement)(m_network, &elementRef, &element);
+  return ElementRef(elementRef);
 }
 
 /**

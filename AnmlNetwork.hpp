@@ -21,6 +21,7 @@
 #define APSDK_ANMLNETWORK_HPP_
 
 #include "AnmlMacro.hpp"
+#include "ElementRef.hpp"
 
 #include <string>
 
@@ -37,7 +38,7 @@ public:
 
   AnmlNetwork(const AnmlNetwork&);
 
-  void
+  ElementRef
   addMacroRef(const AnmlMacro&, const std::string&);
 
   void
