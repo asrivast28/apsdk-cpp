@@ -77,6 +77,16 @@ ElementRef::~ElementRef(
   m_elementRef = 0;
 }
 
+
+std::ostream& operator<< (
+  std::ostream& stream,
+  const ElementRef& obj
+)
+{
+  stream << obj.m_elementRef;
+  return stream;
+}
+
 size_t
 ElementRefHasher::operator()(
   const ElementRef& elementRef

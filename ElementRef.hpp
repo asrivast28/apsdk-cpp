@@ -20,6 +20,7 @@
 #ifndef APSDK_ELEMENTREF_HPP_
 #define APSDK_ELEMENTREF_HPP_
 
+#include <ostream>
 #include <string>
 
 #include <micron/ap/ap_anml.h>
@@ -42,6 +43,9 @@ public:
 
   bool
   operator==(const ElementRef&) const;
+
+  friend
+  std::ostream& operator<< (std::ostream& stream, const ElementRef&);
 
   ~ElementRef();
 
