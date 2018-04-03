@@ -113,7 +113,13 @@ Automaton::setSymbol(
   SymbolChange& changes
 )
 {
-  APCALL_CHECK(AP_SetSymbol)(m_automaton, *elementMap, *changes, changes.count());
+  //APCALL_CHECK(AP_SetSymbol)(m_automaton, *elementMap, *changes, changes.count());
+  ap_element_map_t emap = *elementMap;
+  struct ap_symbol_change* allChanges = *changes;
+  size_t changeCount = changes.count();
+  for (size_t idx = 0; idx < changeCount; ++idx) {
+    APCALL_CHECK(AP_SetSymbol)(m_automaton, emap, &allChanges[idx], 1);
+  }
 }
 
 /**
