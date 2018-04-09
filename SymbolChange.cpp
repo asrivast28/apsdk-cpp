@@ -47,7 +47,7 @@ SymbolChange::getHexSymbol(
 }
 
 /**
- * @brief  Converts the first B bytes of the number to hex.
+ * @brief  Converts the B least significant bytes of the number to hex.
  *
  * @tparam B  Number of bytes to be converted.
  * @param n   Number to be converted to hex.
@@ -62,12 +62,11 @@ SymbolChange::getHexSymbols(
 {
   // Reinterpret the given number as stream of unsigned char bytes.
   unsigned char* x = reinterpret_cast<unsigned char*>(&n);
-  x += (B - 1);
   std::array<HexSymbolType, B> symbols;
   // Assign the hex symbol for each byte.
   for (HexSymbolType& symbol : symbols) {
     symbol = getHexSymbol(*x);
-    --x;
+    ++x;
   }
   return symbols;
 }
