@@ -12,6 +12,8 @@ The SDK provides the C API around which this wrapper works.
 * **SCons**  
 SCons, a cross-platform Python based build environment, is required for building the project.
  More information about the tool can be found at [http://scons.org/](http://scons.org/).
+* **C++ Utils**  
+This library uses timing functionality from the [cpp-utils](https://github.com/asrivast28/cpp-utils) repository.
 
 ## Building
 This repository is not intended to be used in a stand-alone mode. Therefore, only an `SConscript` file is provided for the repository, which can be
