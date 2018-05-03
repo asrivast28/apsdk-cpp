@@ -145,8 +145,10 @@ Device::search(
     } while (numMatches > 0);
   } while (index < dataSize);
 
-  std::cout << "Time taken in scanning flows: " << t1.elapsed() << std::endl;
-  std::cout << "Time taken in getting matches: " << t2.elapsed() << std::endl;
+  std::cout << "# of bytes scanned: " << data.size() << std::endl;
+  std::cout << "Time taken in scanning: " << t1.elapsed() << " (effective streaming rate: " << data.size() / (1024 * 1024 * t1.elapsed()) << " MBps)" << std::endl;
+  std::cout << "# of matches generated: " << allResults.size() << std::endl;
+  std::cout << "Time taken in getting the matches: " << t2.elapsed() << std::endl;
 
   APCALL_CHECK(AP_CloseFlow)(m_device, flow);
   return allResults;
