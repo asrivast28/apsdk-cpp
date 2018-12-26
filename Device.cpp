@@ -99,7 +99,8 @@ Device::load(
 std::vector<std::pair<size_t, ElementRef> >
 Device::search(
   std::vector<unsigned char>& data,
-  const size_t maxChunkSize
+  const size_t maxChunkSize,
+  const bool printStats
 )
 {
   std::vector<std::pair<size_t, ElementRef> > allResults;
@@ -145,10 +146,12 @@ Device::search(
     } while (numMatches > 0);
   } while (index < dataSize);
 
-  std::cout << "# of bytes scanned: " << data.size() << std::endl;
-  std::cout << "Time taken in scanning: " << t1.elapsed() << " (effective streaming rate: " << data.size() / (1024 * 1024 * t1.elapsed()) << " MBps)" << std::endl;
-  std::cout << "# of matches generated: " << allResults.size() << std::endl;
-  std::cout << "Time taken in getting the matches: " << t2.elapsed() << std::endl;
+  if (printStats) {
+    std::cout << "# of bytes scanned: " << data.size() << std::endl;
+    std::cout << "Time taken in scanning: " << t1.elapsed() << " (effective streaming rate: " << data.size() / (1024 * 1024 * t1.elapsed()) << " MBps)" << std::endl;
+    std::cout << "# of matches generated: " << allResults.size() << std::endl;
+    std::cout << "Time taken in getting the matches: " << t2.elapsed() << std::endl;
+  }
 
   APCALL_CHECK(AP_CloseFlow)(m_device, flow);
   return allResults;
