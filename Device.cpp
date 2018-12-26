@@ -176,10 +176,16 @@ Device::unload(
 Device::~Device(
 )
 {
-  unload();
-  if (m_device != 0) {
-    APCALL_CHECK(AP_CloseDevice)(m_device);
-    m_device = 0;
+  try {
+    unload();
+    if (m_device != 0) {
+      APCALL_CHECK(AP_CloseDevice)(m_device);
+      m_device = 0;
+    }
+  }
+  catch (const std::runtime_error& e) {
+    std::cerr << "Unable to close the device because of errors." << std::endl;
+    std::cerr << e.what() << std::endl;
   }
 }
 
