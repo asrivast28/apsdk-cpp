@@ -19,6 +19,8 @@
  */
 #include "ElementRef.hpp"
 
+#include <cassert>
+
 namespace ap {
 
 /**
@@ -37,6 +39,7 @@ ElementRef::ElementRef(
   const ap_anml_element_ref_t& elementRef
 ) : m_elementRef(elementRef)
 {
+  assert(elementRef > 0);
 }
 
 /**
