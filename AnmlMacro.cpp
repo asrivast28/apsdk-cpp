@@ -76,7 +76,7 @@ void
 AnmlMacro::setMacroDefToBeCompiled(
 ) const
 {
-  APCALL_CHECK(AP_SetMacroDefToBeCompiled)(m_macro);
+  APCALL_CHECK_ZERO(AP_SetMacroDefToBeCompiled)(m_macro);
 }
 
 /**

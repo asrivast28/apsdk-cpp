@@ -67,7 +67,7 @@ ElementMap::ElementMap(
 #else
 	//fd = CreateFileA(fileName.c_str(), GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 #endif
-  APCALL_CHECK(AP_RestoreElementMap)(&m_elementMap, fd);
+  APCALL_CHECK_ZERO(AP_RestoreElementMap)(&m_elementMap, fd);
 #if defined(LINUX32) || defined(LINUX64)
   close(fd);
 #else
@@ -108,7 +108,7 @@ ElementMap::getElementRef(
 ) const
 {
   ap_anml_element_ref_t elementRef;
-  APCALL_CHECK(AP_GetElementRefFromElementId)(m_elementMap, &elementRef, elementId.c_str());
+  APCALL_CHECK_ZERO(AP_GetElementRefFromElementId)(m_elementMap, &elementRef, elementId.c_str());
   return ElementRef(elementRef);
 }
 
@@ -119,7 +119,7 @@ ElementMap::getElementId(
 {
   unsigned bufSize = APCALL_CHECK(AP_GetElementIdFromElementRef)(m_elementMap, static_cast<char*>(0), 0, *elementRef);
   std::vector<char> elementId(bufSize+1, 0);
-  APCALL_CHECK(AP_GetElementIdFromElementRef)(m_elementMap, &elementId[0], bufSize, *elementRef);
+  APCALL_CHECK_ZERO(AP_GetElementIdFromElementRef)(m_elementMap, &elementId[0], bufSize, *elementRef);
   return std::string(&elementId[0]);
 }
 
@@ -139,7 +139,7 @@ ElementMap::save(
 #else
 	fd = CreateFileA(fileName.c_str(), GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 #endif
-  APCALL_CHECK(AP_SaveElementMap)(m_elementMap, fd);
+  APCALL_CHECK_ZERO(AP_SaveElementMap)(m_elementMap, fd);
 #if defined(LINUX32) || defined(LINUX64)
   close(fd);
 #else
@@ -167,7 +167,13 @@ ElementMap::~ElementMap(
 {
   // Destroy the element map only if it points to a valid instance.
   if (m_elementMap != 0) {
-    APCALL_CHECK(AP_DestroyElementMap)(m_elementMap);
+    try {
+      APCALL_CHECK_ZERO(AP_DestroyElementMap)(m_elementMap);
+    }
+    catch (const std::runtime_error& e) {
+      std::cerr << "Unable to destroy the element map because of errors." << std::endl;
+      std::cerr << e.what() << std::endl;
+    }
     m_elementMap = 0;
   }
 }

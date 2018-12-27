@@ -41,7 +41,7 @@ calcLoadSize(
   for ( const std::reference_wrapper<Automaton>& automaton : automataRefs ) {
     automata.push_back(*(automaton.get()));
   }
-  APCALL_CHECK(AP_CalcLoadSize)(&loadSize[0], &automata[0], automata.size());
+  APCALL_CHECK_ZERO(AP_CalcLoadSize)(&loadSize[0], &automata[0], automata.size());
   return loadSize;
 }
 
@@ -55,7 +55,7 @@ queryDeviceCount(
 )
 {
   unsigned numDevices = 0;
-  APCALL_CHECK(AP_QueryDeviceCount)(&numDevices);
+  APCALL_CHECK_ZERO(AP_QueryDeviceCount)(&numDevices);
   return numDevices;
 }
 
@@ -72,7 +72,7 @@ queryDeviceMetrics(
 )
 {
   std::vector<struct ap_device_metrics> deviceMetrics(queryDeviceCount());
-  APCALL_CHECK(AP_QueryDeviceMetrics)(&deviceMetrics[0], deviceName.c_str());
+  APCALL_CHECK_ZERO(AP_QueryDeviceMetrics)(&deviceMetrics[0], deviceName.c_str());
   return deviceMetrics;
 }
 
@@ -86,7 +86,7 @@ configureDevice(
   const std::string& deviceName
 )
 {
-  APCALL_CHECK(AP_ConfigureDevice)(deviceName.c_str(), static_cast<struct ap_device_config*>(0));
+  APCALL_CHECK_ZERO(AP_ConfigureDevice)(deviceName.c_str(), static_cast<struct ap_device_config*>(0));
 }
 
 /**
@@ -101,9 +101,9 @@ queryDeviceConfig(
   const std::string& deviceName
 )
 {
-  unsigned loadRegions;
-  loadRegions = APCALL_CHECK(AP_QueryDeviceConfig)(deviceName.c_str(), static_cast<struct ap_device_config*>(0));
-  return loadRegions;
+  struct ap_device_config config;
+  APCALL_CHECK_ZERO(AP_QueryDeviceConfig)(deviceName.c_str(), &config);
+  return config.load_region_count;
 }
 
 } // namespace runtime

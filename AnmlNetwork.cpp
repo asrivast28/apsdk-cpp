@@ -59,7 +59,7 @@ AnmlNetwork::addMacroRef(
   element.id = anmlId.c_str();
 
   ap_anml_element_ref_t elementRef;
-  APCALL_CHECK(AP_AddAnmlElement)(m_network, &elementRef, &element);
+  APCALL_CHECK_ZERO(AP_AddAnmlElement)(m_network, &elementRef, &element);
   return ElementRef(elementRef);
 }
 
@@ -73,7 +73,7 @@ AnmlNetwork::exportAnml(
   const std::string& fileName
 ) const
 {
-  APCALL_CHECK(AP_ExportAnml)(m_network, fileName.c_str(), static_cast<const char*>(0));
+  APCALL_CHECK_ZERO(AP_ExportAnml)(m_network, fileName.c_str(), static_cast<const char*>(0));
 }
 
 /**
